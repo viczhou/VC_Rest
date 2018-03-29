@@ -6,8 +6,6 @@ Page({
     },
     onLoad: function () {
 
-
-
     },
     mapClick: function () {
         var that = this
@@ -38,10 +36,23 @@ Page({
             }
         })
     },
-    previewImage: function (e) {
-        wx.previewImage({
-            current: e.currentTarget.id, // 当前显示图片的http链接
-            urls: this.data.files // 需要预览的图片http链接列表
-        })
+    imgClick:function(){
+        this.imgMenu()
+    },
+    imgMenu: function () {
+        var that = this
+        
+        wx.showActionSheet({
+            itemList: ['查看大图', '重新选择'],
+            success: function (res) {
+                if (res.tapIndex ===1) {
+                    that.chooseImage()
+                } else if (res.tapIndex === 0){
+                    wx.previewImage({
+                        urls: that.data.files
+                    })
+                }
+            }
+        });
     }
 })
