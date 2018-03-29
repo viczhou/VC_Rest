@@ -1,0 +1,36 @@
+<view class='page__bd'>
+    <view class='index-head'>注册</view>
+
+    <form class='index-form' bindsubmit='formSubmit'>
+
+        <view class="weui-cells weui-cells_after-title">
+           
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">手机号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name='phone' placeholder="请输入手机号" bindinput="checkPhone" maxlength='11' type="number" />
+                </view>
+                <view class="weui-cell__ft">
+                    <view class="weui-vcode-btn code" bindtap="clickCode" >{{msg}}</view>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">验证码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name='code' placeholder="验证码" bindinput="checkCode" maxlength='6' type="number"/>
+                </view>
+            </view>
+
+        </view>
+
+        <view class="page__bd page__bd_spacing index-btn">
+            <button class="weui-btn" disabled="{{regist_btn}}" type="primary" form-type='submit'>注册</button>
+        </view>
+
+    </form>
+</view>

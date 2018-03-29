@@ -1,0 +1,23 @@
+<view class='page__bd'>
+    <view class='index-head'>设置密码</view>
+
+    <form class='index-form' bindsubmit='formSubmit'>
+
+        <view class="weui-cells weui-cells_after-title">
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">密码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name='code' placeholder="8-12位，数字/字母/字符组合" bindinput="checkPwd" maxlength='12' />
+                </view>
+            </view>
+        </view>
+
+        <view class="page__bd page__bd_spacing index-btn">
+            <button class="weui-btn" disabled="{{pwd_btn}}" type="primary" form-type='submit'>确定</button>
+        </view>
+
+    </form>
+</view>

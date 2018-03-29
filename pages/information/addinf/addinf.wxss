@@ -1,0 +1,12 @@
+.require{
+    display: inline-block ;
+    color: red;
+    margin-right: 2px; 
+}
+
+.main{
+    margin-top: 50px
+}
+.head{
+    text-align: center;
+}

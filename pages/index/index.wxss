@@ -1,0 +1,28 @@
+.index-form {
+    position: absolute;
+    margin-top: 30%;
+    width: 100%;
+    height: 50%;
+}
+
+.index-btn {
+    width: 90%;
+    margin: 15% auto;
+    margin-bottom: 10px;
+}
+
+.index-text1, .index-text2 {
+
+    display: inline-block;
+}
+
+.index-text2 {
+    position: absolute;
+    right: 0%;
+}
+
+.index-head{
+    position: absolute;
+    font-size: 30px;
+    margin: 10% 0 10% 5%;
+}

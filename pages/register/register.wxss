@@ -1,0 +1,37 @@
+.code {
+    margin-left: 5px;
+    width : 80px ;
+    text-align: center;
+    height: 2.58823529em;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 0 0.6em 0 0.7em;
+    border-left: 1px solid #e5e5e5;
+    line-height: 2.58823529em;
+    font-size: 17px;
+    color: #3cc51f;
+    white-space: nowrap;
+}
+
+.code:active {
+    color: #52a341;
+}
+
+.index-form {
+    position: absolute;
+    margin-top: 30%;
+    width: 100%;
+    height: 50%;
+}
+
+.index-btn {
+    width: 90%;
+    margin: 10% auto;
+    margin-bottom: 10px;
+}
+
+.index-head {
+    position: absolute;
+    font-size: 30px;
+    margin: 10% 0 10% 5%;
+}

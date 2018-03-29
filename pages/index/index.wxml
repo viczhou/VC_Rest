@@ -1,0 +1,29 @@
+<view class='page__bd'>
+    <view class='index-head'>登录</view>
+    <form class='index-form' bindsubmit='formSubmit'>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入账号" type="number" maxlength='11' value='{{phone}}'/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入密码" password='true' />
+                </view>
+            </view>
+        </view>
+
+        <view class="page__bd page__bd_spacing index-btn">
+            <button class="weui-btn" type="primary" form-type='submit'>登录</button>
+        </view>
+
+        <view class="weui-cells__tips index-text1">
+            <navigator url="/pages/register/dislogin/dislogin" hover-class="navigator-hover">无法登陆？</navigator>
+        </view>
+        <view class="weui-cells__tips index-text2">
+            <navigator url="/pages/register/register" hover-class="navigator-hover">新用户注册</navigator>
+        </view>
+    </form>
+</view>

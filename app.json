@@ -1,0 +1,19 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/example/input/input",
+    "pages/register/register",
+    "pages/register/dislogin/dislogin",
+    "pages/register/setpwd/setpwd",
+    "pages/information/addinf/addinf",
+    "pages/information/editinf/editinf"
+
+  ],
+  "window":{
+    "backgroundTextStyle":"light" ,
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "vc点餐",
+    "navigationBarTextStyle":"black" ,
+    "backgroundColor":"#f8f8f8"
+  }
+}
