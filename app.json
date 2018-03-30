@@ -6,7 +6,14 @@
     "pages/register/dislogin/dislogin",
     "pages/register/setpwd/setpwd",
     "pages/information/addinf/addinf",
-    "pages/information/editinf/editinf"
+    "pages/information/editinf/editinf",
+    "pages/main/index/index",
+    "pages/main/restinfo/restinfo",
+    "pages/main/qrcode/qrcode",
+    "pages/main/qrcodemanger/qrcodemanger",
+    "pages/main/menumanger/menumanger",
+    "pages/main/reststatus/reststatus",
+    "pages/main/print/print"
 
   ],
   "window":{

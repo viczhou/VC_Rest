@@ -1,0 +1,84 @@
+<view class='tabBar'>
+    <view class='tabBar-menu' bindtap='tabBarClick'>
+        <block wx:if='{{active === 1}}'>
+            <image src='/images/untreated_active.png' class='image' />
+            <view class='tarBar-text_active'>未处理</view>
+        </block>
+        <block wx:else>
+            <image src='/images/untreated.png' class='image' />
+            <view class='tarBar-text'>未处理</view>
+        </block>
+    </view>
+
+    <view class='tabBar-menu' bindtap='tabBarClick'>
+        <block wx:if='{{active === 2}}'>
+            <image src='/images/handle_active.png' class='image' />
+            <view class='tarBar-text_active'>已处理</view>
+        </block>
+        <block wx:else>
+            <image src='/images/handle.png' class='image' />
+            <view class='tarBar-text'>已处理</view>
+        </block>
+    </view>
+    <view class='tabBar-menu' bindtap='tabBarClick'>
+        <block wx:if='{{active === 3}}'>
+            <image src='/images/manger_active.png' class='image' />
+            <view class='tarBar-text_active'>管理</view>
+        </block>
+        <block wx:else>
+            <image src='/images/manger.png' class='image' />
+            <view class='tarBar-text'>管理</view>
+        </block>
+
+    </view>
+    <view class='tabBar-menu' bindtap='tabBarClick'>
+        <block wx:if='{{active === 4}}'>
+            <image src='/images/set_active.png' class='image' />
+            <view class='tarBar-text_active'>设置</view>
+        </block>
+        <block wx:else>
+            <image src='/images/set.png' class='image' />
+            <view class='tarBar-text'>设置</view>
+        </block>
+    </view>
+</view>
+
+<view class='main'>
+    <!-- 未处理 -->
+    <block wx:if='{{active === 1}}'>
+
+    </block>
+    <!-- 已处理 -->
+    <block wx:if='{{active === 2}}'>
+    </block>
+    <!-- 管理 -->
+    <block wx:if='{{active === 3}}'>
+        <view class='manger-head manger-head-border'>
+
+            <view class='manger-head-content'>￥{{total_money}}</view>
+            <view class='manger-head-title'>今日营业额</view>
+        </view>
+        <view class='manger-head'>
+            <view class='manger-head-content'>{{oder_num}}</view>
+            <view class='manger-head-title'>订单数</view>
+        </view>
+
+        <view class="page">
+            <view class="page__bd">
+                <view class="weui-grids border">
+                    <block wx:for="{{grids}}" wx:key="*this">
+                        <navigator url="/pages/main/{{urls[item]}}" class="weui-grid border" hover-class="weui-grid_active">
+                            <image class="weui-grid__icon" src="/images/{{imgs[item]}}.png" />
+                            <view class="weui-grid__label">{{img_title[item]}}</view>
+                        </navigator>
+                    </block>
+                </view>
+            </view>
+        </view>
+
+
+    </block>
+    <!-- 设置 -->
+    <block wx:if='{{active === 4}}'>
+    </block>
+</view>

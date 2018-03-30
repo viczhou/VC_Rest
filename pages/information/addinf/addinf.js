@@ -5,7 +5,7 @@ Page({
         shop_address: ''
     },
     onLoad: function () {
-
+        
     },
     mapClick: function () {
         var that = this
@@ -36,23 +36,37 @@ Page({
             }
         })
     },
-    imgClick:function(){
+    imgClick: function () {
         this.imgMenu()
     },
     imgMenu: function () {
         var that = this
-        
+
         wx.showActionSheet({
             itemList: ['查看大图', '重新选择'],
             success: function (res) {
-                if (res.tapIndex ===1) {
+                if (res.tapIndex === 1) {
                     that.chooseImage()
-                } else if (res.tapIndex === 0){
+                } else if (res.tapIndex === 0) {
                     wx.previewImage({
                         urls: that.data.files
                     })
                 }
             }
         });
+    },
+    formSubmit: function (e) {
+        if (e.detail.value.shop_name !== '' && e.detail.value.shop_phone !== '' && e.detail.value.shop_licence !== '' && this.data.files !== undefined) {
+            wx.redirectTo({
+                url: '/pages/main/index/index',
+            })
+        } else {
+            wx.showToast({
+                title: '请填写完必填信息后提交',
+                icon: 'none',
+                duration: 1200
+            })
+        }
+
     }
 })

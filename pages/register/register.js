@@ -13,11 +13,11 @@ Page({
 
         var num = 60;
 
-        this.setData({ msg: num + 's' })
+        this.setData({ msg: '已发送(' +num + 's)' })
         var interval = setInterval(function () {
             num -= 1
             this.setData({
-                msg: num + 's',
+                msg: '已发送('+num + 's)',
                 disable: true
             })
             if (num === 0) {

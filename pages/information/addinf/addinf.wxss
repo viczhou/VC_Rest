@@ -1,7 +1,7 @@
 .require{
     display: inline-block ;
     color: red;
-    
+    margin-left: -3px
 }
 
 .main{

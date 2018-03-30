@@ -1,15 +1,15 @@
-<form>
+<form bindsubmit='formSubmit'>
 
     <view class='head'>
         <view class="weui-uploader">
             <view class="weui-uploader__hd">
-                <view class="weui-uploader__title head">店铺头像</view>
+                <view class="weui-uploader__title head"><view class='require'>*</view>店铺头像</view>
             </view>
-            <view class="weui-uploader__bd" style="text-align:center">
+            <view class="weui-uploader__bd" style="text-align:center;margin-right:0">
 
                 <block wx:if="{{!files}}">
                     <view class="weui-uploader__input-box no-float">
-                        <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                        <view class="weui-uploader__input" name='img' bindtap="chooseImage"></view>
                     </view>
                 </block>
 
