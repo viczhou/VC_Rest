@@ -1,0 +1,85 @@
+<form bindsubmit='formSubmit'>
+
+    <view class='head'>
+        <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+                <view class="weui-uploader__title head">
+                    <view class='require'>*</view>店铺头像</view>
+            </view>
+            <view class="weui-uploader__bd" style="text-align:center;margin-right:0">
+
+                <block wx:if="{{!files}}">
+                    <view class="weui-uploader__input-box no-float">
+                        <view class="weui-uploader__input" name='img' bindtap="chooseImage"></view>
+                    </view>
+                </block>
+
+                <view class="weui-uploader__files" id="uploaderFiles" style="text-align:center">
+                    <block wx:if="{{files}}">
+                        <view class="weui-uploader__file no-float" bindtap="imgClick" id="{{files}}">
+                            <image class="weui-uploader__img" src="{{files}}" mode="aspectFill" />
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='main'>
+        <view class="weui-cells weui-cells_after-title">
+
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">
+                        <view class='require'>*</view>店铺名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name='shop_name' placeholder="请输入店铺名" maxlength='15' />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">
+                        <view class='require'>*</view>店铺电话</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name='shop_phone' placeholder="电话" maxlength='11' type="number" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">负责人</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name='resp_name' placeholder="负责人" maxlength='5' />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">负责人电话</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name='resp_phone' placeholder="负责人电话" maxlength='11' type='number' />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">店铺地址</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" disabled name='shop_address' placeholder="店铺地址" bindtap='mapClick' value='{{shop_address}}' />
+                </view>
+            </view>
+
+        </view>
+    </view>
+
+    <view class="page__bd page__bd_spacing index-btn">
+        <button class="weui-btn from_btn" type="primary" form-type='submit'>提交</button>
+    </view>
+
+</form>

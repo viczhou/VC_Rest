@@ -1,0 +1,22 @@
+.require{
+    display: inline-block ;
+    color: red;
+    margin-left: -3px
+}
+
+.main{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.head{
+    text-align: center;
+    margin-top:10px;
+}
+.no-float{
+    float:none;
+    display:inline-block;
+    margin: 0 0;
+}
+.from_btn{
+    width: 95%;
+}

@@ -1,26 +1,30 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/example/input/input",
-    "pages/register/register",
-    "pages/register/dislogin/dislogin",
-    "pages/register/setpwd/setpwd",
-    "pages/information/addinf/addinf",
-    "pages/information/editinf/editinf",
-    "pages/main/index/index",
-    "pages/main/restinfo/restinfo",
-    "pages/main/qrcode/qrcode",
-    "pages/main/qrcodemanger/qrcodemanger",
-    "pages/main/menumanger/menumanger",
-    "pages/main/reststatus/reststatus",
-    "pages/main/print/print"
-
-  ],
-  "window":{
-    "backgroundTextStyle":"light" ,
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "vc点餐",
-    "navigationBarTextStyle":"black" ,
-    "backgroundColor":"#f8f8f8"
-  }
+    "pages": [
+        "pages/index/index",
+        "pages/example/input/input",
+        "pages/register/register",
+        "pages/register/dislogin/dislogin",
+        "pages/register/setpwd/setpwd",
+        "pages/information/addinf/addinf",
+        "pages/information/editinf/editinf",
+        "pages/main/index/index",
+        "pages/main/manger/restinfo/restinfo",
+        "pages/main/manger/qrcode/qrcode",
+        "pages/main/manger/qrcodemanger/qrcodemanger",
+        "pages/main/manger/menumanger/menumanger",
+        "pages/main/manger/reststatus/reststatus",
+        "pages/main/manger/print/print",
+        "pages/main/setting/feedback/feedback",
+        "pages/main/setting/about/about",
+        "pages/main/setting/account/account",
+        "pages/main/setting/account/changepwd/changepwd",
+        "pages/main/setting/account/changeaccount/changeaccount"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "vc点餐",
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#f8f8f8"
+    }
 }

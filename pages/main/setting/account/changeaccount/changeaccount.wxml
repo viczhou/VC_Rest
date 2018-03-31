@@ -1,0 +1,27 @@
+<form bindsubmit='formSubmit' class='form'>
+
+    <view class="weui-cells__title">新手机号：</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__bd">
+                <input class="weui-input" name='phone' placeholder="请输入手机号" bindinput="checkPhone" maxlength='11' type="number" />
+            </view>
+            <view class="weui-cell__ft">
+                <view class="weui-vcode-btn code" bindtap="clickCode">{{msg}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-cells__title">验证码：</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+                <input class="weui-input" name='code' placeholder="验证码" bindinput="checkCode" maxlength='6' type="number" />
+            </view>
+        </view>
+    </view>
+    <view class="page__bd page__bd_spacing index-btn button">
+        <button class="weui-btn" type="primary" form-type='submit'>确定</button>
+    </view>
+
+</form>

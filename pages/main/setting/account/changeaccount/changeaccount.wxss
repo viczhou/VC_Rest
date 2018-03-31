@@ -1,0 +1,26 @@
+.button{
+    width: 90%;
+    margin: 50px auto 0;
+}
+.form{
+    margin-top: 20px;
+}
+
+.code {
+    margin-left: 5px;
+    width : 80px ;
+    text-align: center;
+    height: 2.58823529em;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 0 0.6em 0 0.7em;
+    border-left: 1px solid #e5e5e5;
+    line-height: 2.58823529em;
+    font-size: 17px;
+    color: #3cc51f;
+    white-space: nowrap;
+}
+
+.code:active {
+    color: #52a341;
+}

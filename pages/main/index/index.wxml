@@ -67,7 +67,7 @@
             <view class="page__bd">
                 <view class="weui-grids border">
                     <block wx:for="{{grids}}" wx:key="*this">
-                        <navigator url="/pages/main/{{urls[item]}}" class="weui-grid border" hover-class="weui-grid_active">
+                        <navigator url="/pages/main/manger/{{urls[item]}}" class="weui-grid border" hover-class="weui-grid_active">
                             <image class="weui-grid__icon" src="/images/{{imgs[item]}}.png" />
                             <view class="weui-grid__label">{{img_title[item]}}</view>
                         </navigator>
@@ -80,5 +80,43 @@
     </block>
     <!-- 设置 -->
     <block wx:if='{{active === 4}}'>
+
+        <view class="weui-cells weui-cells_after-title setting-head">
+            <navigator url="/pages/main/setting/account/account" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">账号设置</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="/pages/information/editinf/editinf" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">餐厅信息设置</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+        </view>
+
+        <view class="weui-cells weui-cells_after-title setting-body">
+            <navigator url="#" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">通知与提示音</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+        </view>
+
+        <view class="weui-cells weui-cells_after-title setting-foot">
+            <navigator url="/pages/main/setting/feedback/feedback" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">问题反馈</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="/pages/main/setting/about/about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">关于我们</view>
+            </navigator>
+        </view>
+
+        <view class="weui-cells weui-cells_after-title setting-foot">
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='makePhone'>
+                <view class="weui-cell__bd setting-phone">客服电话  185-6621-1755</view>
+            </view>
+        </view>
+
+        <view class="page__bd page__bd_spacing index-btn setting-btn">
+            <button class="weui-btn" type="primary" bindtap="exitLogin">退出登录</button>
+        </view>
     </block>
 </view>

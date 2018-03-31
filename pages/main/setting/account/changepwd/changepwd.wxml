@@ -1,0 +1,23 @@
+<form bindsubmit='formSubmit'>
+    <view class="weui-cells__title">原密码：</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="phone" placeholder="请输入原密码" value="{{phone}}" maxlength='12' />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">新密码：</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="phone" placeholder="请输入新密码" value="{{phone}}" maxlength='12' />
+            </view>
+        </view>
+    </view>
+
+    <view class="page__bd page__bd_spacing index-btn button">
+        <button class="weui-btn" type="primary" form-type='submit'>确定</button>
+    </view>
+
+</form>

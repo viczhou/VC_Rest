@@ -1,0 +1,23 @@
+<form bindsubmit='formSubmit'>
+    <view class="weui-cells__title">联系方式：</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="phone" placeholder="请输入电话号码" value="{{phone}}" type='number' maxlength='11' />
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">问题描述：</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea class="weui-textarea" name="text" placeholder="请输入问题详细描述" value='{{text}}' style="height: 3.3em" bindinput='input' maxlength='200' />
+                <view class="weui-textarea-counter">{{number}}/200</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="page__bd page__bd_spacing index-btn feedback-btn">
+        <button class="weui-btn" type="primary" form-type='submit'>提交反馈</button>
+    </view>
+</form>
