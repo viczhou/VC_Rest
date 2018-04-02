@@ -1,4 +1,5 @@
 /* manger */
+
 .tabBar {
     position: fixed;
     bottom: 0;
@@ -7,6 +8,7 @@
     background-color: #37414a;
     z-index: 100;
 }
+
 .tabBar-menu {
     display: -webkit-inline-flex;
     display: inline-flex;
@@ -17,14 +19,17 @@
     align-items: center;
     justify-content: center;
 }
-.tarBar-text{
+
+.tarBar-text {
     font-size: 14px;
     color: #8a8a8a;
 }
-.tarBar-text_active{
+
+.tarBar-text_active {
     font-size: 14px;
-    color: #ffffff;
+    color: #fff;
 }
+
 .image {
     margin-top: 2px;
     z-index: 10100;
@@ -36,49 +41,77 @@
     margin-bottom: 50px;
 }
 
-.manger-head{
+.manger-head {
     display: -webkit-inline-flex;
     display: inline-flex;
     height: 100px;
     width: calc(50% - 0.5px);
-    background-color:#ffffff;
+    background-color: #fff;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
 }
-.manger-head-border{
-    border-right:1px solid #f8f8f8;
+
+.manger-head-border {
+    border-right: 1px solid #f8f8f8;
 }
-.manger-head-content{
+
+.manger-head-content {
     font-size: 30px;
     color: #76a6e9;
 }
-.page{
-    background-color: #ffffff ;
+
+.page {
+    background-color: #fff;
 }
 
-.border{
+.border {
     border-color: #f8f8f8;
 }
 
-
 /* setting */
-.setting-head{
+
+.setting-head {
     margin-top: 15px;
 }
-.setting-body{
+
+.setting-body {
     margin: 10px 0;
 }
-.setting-foot{
+
+.setting-foot {
     margin-bottom: 10px;
 }
 
-.setting-btn{
+.setting-btn {
     width: 90%;
-    margin:  50px auto 0;
+    margin: 50px auto 0;
 }
-.setting-phone{
-    color:#76a6e9;
+
+.setting-phone {
+    color: #76a6e9;
     text-align: center;
+}
+
+/* handle */
+
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.page__bd{
+    padding-bottom: 0;
+}
+.topbar{
+    background-color: #fff;
+}
+.weui-form-preview{
+    margin-top: 15px;
+}
+
+.order-item{
+    text-align: left;
+    margin: 4px 0 0 100px;
 }

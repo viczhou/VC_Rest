@@ -1,7 +1,8 @@
 {
     "pages": [
+        "pages/example/preview/preview",
         "pages/index/index",
-        "pages/example/input/input",
+        
         "pages/register/register",
         "pages/register/dislogin/dislogin",
         "pages/register/setpwd/setpwd",
@@ -18,7 +19,8 @@
         "pages/main/setting/about/about",
         "pages/main/setting/account/account",
         "pages/main/setting/account/changepwd/changepwd",
-        "pages/main/setting/account/changeaccount/changeaccount"
+        "pages/main/setting/account/changeaccount/changeaccount",
+        "pages/main/setting/notify/notify"
     ],
     "window": {
         "backgroundTextStyle": "light",
