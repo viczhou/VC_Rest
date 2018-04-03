@@ -1,5 +1,6 @@
 {
     "navigationBarBackgroundColor": "#427eec",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "未处理"
+    "navigationBarTitleText": "未处理",
+    "onReachBottomDistance": 100
 }

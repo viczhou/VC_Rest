@@ -96,22 +96,72 @@
 
 /* handle */
 
-page,
-.page,
-.page__bd{
+/* page, .page, .page__bd {
     height: 100%;
-}
-.page__bd{
+} */
+
+.page__bd {
     padding-bottom: 0;
 }
-.topbar{
+
+.topbar {
     background-color: #fff;
 }
-.weui-form-preview{
+
+.weui-form-preview {
     margin-top: 15px;
 }
 
-.order-item{
+.order-item {
     text-align: left;
     margin: 4px 0 0 100px;
+}
+
+.showdetail {
+    width: 32px;
+    height: 24px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.detail-block {
+    position: relative;
+    border-top: 1px #f8f8f8 solid;
+    margin: 0 20px;
+    height: 70px;
+}
+
+.detail-image {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 10px 0 0 0;
+}
+
+.detail-title {
+    position: absolute;
+    top: 10px;
+    left: 80px;
+    right:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+
+
+}
+
+.detail-price {
+    position: absolute;
+    top :40px ;
+    left: 80px;
+    color:red;
+    font-size: 15px;
+}
+
+.detail-count {
+    position: absolute;
+    top: 40px;
+    left : 80%;
+    color:#999;
+    font-size: 14px;
 }

@@ -1,6 +1,6 @@
 {
     "pages": [
-        "pages/example/preview/preview",
+        "pages/example/loadmore/loadmore",
         "pages/index/index",
         
         "pages/register/register",
