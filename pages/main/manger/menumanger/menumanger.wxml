@@ -1,0 +1,44 @@
+<view class='menu_list'>
+    <scroll-view style='height:100%' scroll-y>
+        <block wx:for="{{menu_data}}" wx:key="{{*this}}">
+            <input class="{{index == flag ? 'menu_data_active' : 'menu_data'}}" bindtap='menuClick' data-idx='{{index}}' value="{{item}}" disabled="{{menu_isdisable}}"></input>
+        </block>
+
+        <button class="weui-btn add-menu" type="primary" plain="true" bindtap='edit_menuClick'>{{edit_menuMsg}}</button>
+    </scroll-view>
+</view>
+
+<view class='menu_list_edit' wx:if='{{!menu_isdisable}}'>
+    <scroll-view style='height:100%' scroll-y>
+        <form bindsubmit='edit_menuClick'>
+            <block wx:for="{{menu_data}}" wx:key="{{*this}}">
+                <image src='/images/delete.png' class='delete-image' />
+                <input name="{{index}}" class="{{index == flag ? 'menu_data_active_edit' : 'menu_data_edit'}}" bindtap='menuClick' data-idx='{{index}}' value="{{item}}" disabled="{{menu_isdisable}}" />
+
+            </block>
+            <button class="weui-btn add-menu" type="primary" plain="true">添加</button>
+            <button class="weui-btn add-menu" type="default" plain="true" form-type='submit'>{{edit_menuMsg}}</button>
+        </form>
+    </scroll-view>
+    <!-- 遮罩，避免右侧被点击 -->
+    <view class="right"></view>
+</view>
+
+<view class='food_list'>
+    <scroll-view style='height:100%' scroll-y>
+        <button class="weui-btn add-food" type="primary" plain="true">添加</button>
+        <block wx:for="{{food_data}}" wx:key="{{*this}}">
+            <view class=" {{index == 0 ? 'menu-food border-top' : 'menu-food'}}">
+                <image src="{{item.image}}" class="menu-image" />
+                <view class="menu-title">{{item.name}}</view>
+                <view class="menu-price">￥{{item.price}}</view>
+
+                <view class="menu-btn-box">
+                    <button class="weui-btn menu-btn" type="primary" plain="true">编辑</button>
+                    <button class="weui-btn menu-btn" type="default" plain="true">删除</button>
+                </view>
+            </view>
+        </block>
+
+    </scroll-view>
+</view>

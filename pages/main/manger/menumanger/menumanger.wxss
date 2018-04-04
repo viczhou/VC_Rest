@@ -1,0 +1,164 @@
+page {
+    height: 100%;
+}
+
+.menu_list {
+    height: calc(100% - 20px);
+    width: 25%;
+    background-color: #f8f8f8;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 20px;
+}
+
+.menu_list_edit {
+    position: absolute;
+    height: calc(100% - 20px);
+    width: 40%;
+    background-color: #f8f8f8;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 20px;
+    z-index: 100;
+    left: 0;
+}
+
+.menu_data_edit {
+
+    position: relative;
+    width:calc(100% - 39px);
+    display: inline-block;
+    border-bottom: 1px #fff solid;
+    text-align: left;
+    padding: 10px 0 10px 40px;
+    font-size: 14px;
+    
+}
+
+.menu_data_active_edit {
+
+    position: relative;
+    width: calc(100% - 39px);
+    display: inline-block;
+    border-bottom: 1px #fff solid;
+    text-align: left;
+    padding: 10px 0 10px 40px;
+    font-size: 14px;
+    background-color: #fff;
+}
+.delete-image{
+    position: absolute;
+    width: 20px;
+    height:20px;
+    display: inline-block;
+    margin-top: 13px;
+    z-index: 101;
+    left:10px;
+    
+}
+.right{
+    position: absolute;
+    width: 250% ;
+    top: 0;
+    left: 100%;
+    height: 100%;
+    background-color: rgba(248, 248, 248, 0.5);
+    z-index: 100;
+}
+.menu_data {
+    border-bottom: 1px #fff solid;
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 14px;
+}
+
+.menu_data_active {
+    border-bottom: 1px #fff solid;
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.food_list {
+    width: 75%;
+    height: calc(100% - 20px);
+    background-color: #fff;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 20px;
+}
+
+.menu-food {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    border-bottom: 1px #f8f8f8 solid;
+}
+
+.border-top {
+    border-top: 1px #f8f8f8 solid;
+}
+
+.menu-image {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    margin: 10px 10px;
+    vertical-align: top;
+}
+
+.menu-title {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    left: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.menu-price {
+    display: inline-block;
+    position: absolute;
+    top: 33px;
+    color: red;
+    font-size: 15px;
+}
+
+.menu-btn-box {
+    position: relative;
+    top: -20px;
+    width: 75%;
+    height: 40%;
+    margin-left: 25%;
+    vertical-align: center;
+}
+
+.menu-btn {
+    width: 35%;
+    height: 70%;
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: center;
+    margin: 0 10px;
+    line-height: 2;
+}
+
+.add-food {
+    margin: 10px 20%;
+    width: 60%;
+    height: 40px;
+    line-height: 2.2rem;
+}
+
+.add-menu {
+    margin: 20px 20%;
+    width: 60%;
+    height: 30px;
+    font-size: 14px;
+    padding: 0 0;
+    line-height: 2;
+}

@@ -15,7 +15,9 @@ Page({
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
-        //原始数据，后台获取
+        //未处理数据
+        untreated_data: [] ,
+        //已处理，原始数据，后台获取
         data: [{
             'show': -1,
             'table': 9,

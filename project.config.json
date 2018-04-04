@@ -35,6 +35,12 @@
 				{
 					"id": 0,
 					"name": "11",
+					"pathName": "pages/main/manger/menumanger/menumanger",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "index",
 					"pathName": "pages/main/index/index",
 					"query": ""
 				}

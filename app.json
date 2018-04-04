@@ -1,7 +1,9 @@
 {
     "pages": [
-        "pages/example/loadmore/loadmore",
+        "pages/example/button/button",
         "pages/index/index",
+        
+        
         
         "pages/register/register",
         "pages/register/dislogin/dislogin",

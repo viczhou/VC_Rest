@@ -46,15 +46,18 @@
 <view class='main'>
     <!-- 未处理 -->
     <block wx:if='{{active === 1}}'>
-
+        <view class="weui-loadmore weui-loadmore_line" wx:if="{{untreated_data.length == 0}}">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line" style="background-color:#f8f8f8">暂无数据</view>
+        </view>
     </block>
+    
     <!-- 已处理 -->
     <block wx:if='{{active === 2}}'>
         <view class="weui-navbar topbar" style="position:fixed">
             <block wx:for="{{tabs}}" wx:key="*this">
                 <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}} " bindtap="topbarClick">
                     <view class="weui-navbar__title">{{item}}</view>
-                    
+
                     <view wx:if="{{index ==1 && handback_count !== 0}}" class="weui-badge" style="position: absolute;top: 1.4em;right: 1.4em;">{{handback_count}}</view>
                 </view>
             </block>
@@ -62,6 +65,10 @@
         </view>
         <view class="weui-tab__panel">
             <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+
+                <view class="weui-loadmore weui-loadmore_line" wx:if="{{data.length == 0}}">
+                    <view class="weui-loadmore__tips weui-loadmore__tips_in-line" style="background-color:#f8f8f8">暂无数据</view>
+                </view>
 
                 <block wx:for="{{data}}" wx:key="{{*this}}">
                     <view class="page__bd">
