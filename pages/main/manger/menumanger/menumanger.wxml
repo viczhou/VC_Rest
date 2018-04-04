@@ -12,9 +12,10 @@
     <scroll-view style='height:100%' scroll-y>
         <form bindsubmit='edit_menuClick'>
             <block wx:for="{{menu_data}}" wx:key="{{*this}}">
+                <view>
                 <image src='/images/delete.png' class='delete-image' />
                 <input name="{{index}}" class="{{index == flag ? 'menu_data_active_edit' : 'menu_data_edit'}}" bindtap='menuClick' data-idx='{{index}}' value="{{item}}" disabled="{{menu_isdisable}}" />
-
+                </view>
             </block>
             <button class="weui-btn add-menu" type="primary" plain="true">添加</button>
             <button class="weui-btn add-menu" type="default" plain="true" form-type='submit'>{{edit_menuMsg}}</button>

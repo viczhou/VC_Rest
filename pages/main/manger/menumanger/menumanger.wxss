@@ -26,19 +26,20 @@ page {
 .menu_data_edit {
 
     position: relative;
-    width:calc(100% - 39px);
+    width:calc(100% - 40px);
     display: inline-block;
     border-bottom: 1px #fff solid;
     text-align: left;
     padding: 10px 0 10px 40px;
     font-size: 14px;
+    vertical-align: top;
     
 }
 
 .menu_data_active_edit {
-
+    vertical-align: top;
     position: relative;
-    width: calc(100% - 39px);
+    width: calc(100% - 40px);
     display: inline-block;
     border-bottom: 1px #fff solid;
     text-align: left;
