@@ -16,7 +16,7 @@ Page({
         sliderOffset: 0,
         sliderLeft: 0,
         //未处理数据
-        untreated_data: [] ,
+        untreated_data: [],
         //已处理，原始数据，后台获取
         data: [{
             'show': -1,
@@ -113,7 +113,7 @@ Page({
         }
         ]
     },
-    onLoad: function () {
+    onLoad: function (opt) {
         var that = this;
         wx.getSystemInfo({
             success: function (res) {
@@ -123,6 +123,9 @@ Page({
                     windowHeight: res.windowHeight
                 });
             }
+        })
+        this.setData({
+            shop_id: opt.shop_id
         })
     },
 

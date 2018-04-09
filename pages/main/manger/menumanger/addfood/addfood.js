@@ -1,23 +1,29 @@
 Page({
-    longitude: '',
-    latitude: '',
     data: {
-        shop_address: ''
     },
-    onLoad: function () {
-        
-    },
-    mapClick: function () {
-        var that = this
-        wx.chooseLocation({
-            success: function (res) {
-                that.setData({
-                    shop_address: res.address
-                })
+    onLoad: function (opt) {
+        let array = opt.menu.split(',')
+        let now = array[opt.flag]
 
-                that.latitude = res.latitude
-                that.longitude = res.longitude
-            }
+        if (opt.food_id != undefined) {
+            this.setData({
+                food_id:opt.food_id,
+                files: new Array(opt.food_img),
+                food_price: opt.food_price,
+                food_title: opt.food_title
+            })
+        }
+        this.setData({
+            flag: opt.flag,
+            menu: array,
+            menuPicker: now
+        })
+    },
+    bindPickerChange: function (e) {
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        let that = this
+        this.setData({
+            menuPicker: that.data.menu[e.detail.value]
         })
     },
     chooseImage: function (e) {
@@ -26,12 +32,11 @@ Page({
         wx.chooseImage({
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-            count:1,
+            count: 1,
             success: function (res) {
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
                 that.setData({
                     files: res.tempFilePaths
-
                 });
                 console.log(res.tempFilePaths)
             }
@@ -42,7 +47,6 @@ Page({
     },
     imgMenu: function () {
         var that = this
-
         wx.showActionSheet({
             itemList: ['查看大图', '重新选择'],
             success: function (res) {
@@ -57,24 +61,19 @@ Page({
         });
     },
     formSubmit: function (e) {
-        let shop_id = 0
-        //提交服务器 ，获取返回的shop_id
-
-
-
-        /////
-        
-        if (e.detail.value.shop_name !== '' && e.detail.value.shop_phone !== '' && e.detail.value.shop_licence !== '' && this.data.files !== undefined) {
-            wx.redirectTo({
-                url: '/pages/main/index/index?shop_id='+shop_id,
-            })
+        //提交到服务器
+        /////////////
+        ///
+        ///
+        //////////////////////
+        if (this.data.food_id == undefined){
+            //添加接口
         } else {
-            wx.showToast({
-                title: '请填写完必填信息后提交',
-                icon: 'none',
-                duration: 1200
-            })
+            //调用更新接口
         }
+        
 
+        wx.navigateBack()
     }
+
 })

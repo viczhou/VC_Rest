@@ -142,7 +142,7 @@
             <view class="page__bd">
                 <view class="weui-grids border">
                     <block wx:for="{{grids}}" wx:key="*this">
-                        <navigator url="/pages/main/manger/{{urls[item]}}" class="weui-grid border" hover-class="weui-grid_active">
+                        <navigator url="/pages/main/manger/{{urls[item]}}?shop_id={{shop_id}}" class="weui-grid border" hover-class="weui-grid_active">
                             <image class="weui-grid__icon" src="/images/{{imgs[item]}}.png" />
                             <view class="weui-grid__label">{{img_title[item]}}</view>
                         </navigator>

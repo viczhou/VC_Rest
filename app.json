@@ -1,9 +1,7 @@
 {
     "pages": [
-        "pages/example/button/button",
         "pages/index/index",
-        
-        
+        "pages/example/button/button",
         
         "pages/register/register",
         "pages/register/dislogin/dislogin",
@@ -22,7 +20,8 @@
         "pages/main/setting/account/account",
         "pages/main/setting/account/changepwd/changepwd",
         "pages/main/setting/account/changeaccount/changeaccount",
-        "pages/main/setting/notify/notify"
+        "pages/main/setting/notify/notify",
+        "pages/main/manger/menumanger/addfood/addfood"
     ],
     "window": {
         "backgroundTextStyle": "light",
