@@ -5,7 +5,7 @@ Page({
             data: e.detail.value,
         })
     },
-    shock:function(e){
+    shake:function(e){
         wx.setStorage({
             key: 'shock',
             data: e.detail.value,
