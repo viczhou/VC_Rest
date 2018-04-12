@@ -1,0 +1,33 @@
+<view wx:if="{{hasLoading}}">
+    <scroll-view scroll-y style="padding-top:10px;height:{{windowHeight / 2 - 50}}px;margin:20px 5px 40px ; background-color:#fff; width:calc(100% - 10px);">
+        <view wx:for="{{order_data.order_detail}}" wx:key="{{*this}}">
+            <view class="weui-form-preview__item">
+                <view class='food_title'>
+                    <view class="weui-form-preview__label title_content">{{item.food_name}}</view>
+                </view>
+                <view class='food_price'>
+                    <view class="weui-form-preview__value order-item _food">￥ {{item.food_price}}</view>
+                    <view class="weui-form-preview__value order-item _food" style="color:red; padding-left:5px;right:5px;position:absolute;"> X {{item.food_count}}</view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <form bindsubmit='formSubmit'>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label title">订单号</view>
+            <input class="weui-form-preview__value order-item content" name='pid' value="{{order_pid}}" disabled />
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label title">下单时间</view>
+            <input class="weui-form-preview__value order-item content" name='time' disabled value="{{order_data.order_time}}" />
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label title">总金额</view>
+            <view class="weui-form-preview__value order-item content money">￥ {{order_data.order_price}} 元</view>
+        </view>
+
+        <view class="page__bd page__bd_spacing index-btn">
+            <button class="weui-btn" type="primary" form-type='submit'>确认结单</button>
+        </view>
+    </form>
+</view>
