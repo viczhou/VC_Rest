@@ -5,7 +5,7 @@ Page({
         let that = this
         wx.request({
             //'url':'https://viczhou.cn/aaaa/test',
-            url:'https://cli.im/api/qrcode/code?text=呵呵',  //网页
+            url:'https://cli.im/api/qrcode/code?text=呵呵&&mhid=5hbOCw/uk8IhMHcqKtdRPKw',  //网页
             //url:'https://pan.baidu.com/share/qrcode?w=150&h=150&url=你的内容', //二进制
             success: function (res) {
                 let result = /qrcode_plugins_img ="(.*?)"/g

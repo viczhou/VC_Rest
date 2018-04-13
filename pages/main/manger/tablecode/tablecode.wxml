@@ -1,0 +1,29 @@
+<view class="page__bd page__bd_spacing index-btn">
+    <button class="weui-btn" type="primary" plain="true" bindtap='btnClick'>添加桌码</button>
+</view>
+<view class='tip'>注：提供每个店铺桌码数量有限，且生成后不可删除，请谨慎添加，生成的二维码永久有效，仅供本餐厅商家版小程序或pc版使用</view>
+
+<view class='title'>我的桌码</view>
+
+<view style='font-size:14px;color:#d9d9d9;text-align:center ;margin-top:100px' wx:if="{{table_code == '' }}">您还没有使用桌面码，赶紧生成一个吧</view>
+<view class="page__bd">
+    <view class="weui-grids border" wx:if="{{table_code != ''}}" style="background:#fff">
+        <block wx:for="{{table_code}}" wx:key="{{*this}}">
+            <view class="weui-grid border" hover-class="weui-grid_active" style="padding:20px 10px 10px" data-idx='{{index}}' bindtap='gridclick'>
+                <image class="weui-grid__icon" src="{{item.code_src}}" style='width:50px;height:50px;' />
+                <view class="weui-grid__label">桌号：{{item.table}}</view>
+            </view>
+        </block>
+    </view>
+</view>
+
+<view>
+    <modal title="添加桌码" wx:if='{{!hiddenmodalput}}' confirm-text="确定" cancel-text="取消" bindcancel="cancelModal" bindconfirm="confirmModal">
+        <input type='text' placeholder="请输入桌号 [0-999] " auto-focus bindinput='modalInputBlur' maxlength='3' type='number' />
+    </modal>
+
+    <modal  wx:if='{{!hiddenmodalcode}}' cancel-text="返回" confirm-text="保存" bindcancel="cancelModal" bindconfirm="saveNewCode">
+        <image class="weui-grid__icon" src="{{table_code[table_code.length - 1].code_src}}" style='width:100px;height:100px;' />
+        <view class="weui-grid__label">桌号：{{modalInput}}</view>
+    </modal>
+</view>

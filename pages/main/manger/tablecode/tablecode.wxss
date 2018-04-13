@@ -1,0 +1,22 @@
+.index-btn {
+    width: 90%;
+    margin: 10% auto;
+    margin-bottom: 10px;
+}
+.tip{
+    color: #d9d9d9;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin: 0 20px 0 40px;
+    text-align: justify;
+    text-indent: -20px;
+}
+.title{
+    border-bottom: 1px #76a6e9 solid;
+    box-sizing: border-box;
+    margin: 20px 20px 10px;
+    padding-bottom: 5px;
+}
+.border{
+    border-color:#f8f8f8; 
+}

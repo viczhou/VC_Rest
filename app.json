@@ -10,7 +10,7 @@
         "pages/information/editinf/editinf",
         "pages/main/index/index",
         "pages/main/manger/restinfo/restinfo",
-        "pages/main/manger/qrcode/qrcode",
+        "pages/main/manger/tablecode/tablecode",
         "pages/main/manger/scancodepay/scancodepay",
         "pages/main/manger/menumanger/menumanger",
         "pages/main/manger/reststatus/reststatus",
