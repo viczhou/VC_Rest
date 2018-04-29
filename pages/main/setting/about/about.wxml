@@ -1,1 +1,4 @@
-<view class='about'>页面开发中...</view>
+<view style="margin:20% 0 0 10px">开发者介绍:</view>
+<view class='about'>《湘潭市伍三幺科技有限公司》坐落于湘潭市湖南科技大学，立足于打造最好用最方便的软件。</view>
+<view style="margin: 50px 0 0 10px;display:inline-block">地址：<view style="color:#9d9d9d;display:inline-block;">湖南科技大学逸夫楼531</view></view>
+<view style="margin: 20px 0 0 10px ;display:inline-block">联系方式：<view style="color:#9d9d9d;display:inline-block">vic@viczhou.cn</view></view>

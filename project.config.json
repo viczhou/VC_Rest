@@ -31,11 +31,12 @@
 		},
 		"miniprogram": {
 			"current": -1,
+
 			"list": [
 				{
 					"id": 0,
 					"name": "11",
-					"pathName": "pages/main/manger/menumanger/menumanger",
+					"pathName": "pages/main/manger/restinfo/restinfo",
 					"query": ""
 				},
 				{

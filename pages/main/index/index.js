@@ -9,14 +9,14 @@ Page({
         oder_num: 0,
         grids: [0, 1, 2, 3, 4, 5],
         imgs: ['print', 'shop_info', 'qr_code', 'menu_manger', 'qr_code_manger', 'shop_status'],
-        img_title: ['打印机', '餐厅信息', '查看桌码', '菜品管理', '桌码管理', '店铺状态'],
-        urls: ['print/print', 'restinfo/restinfo', 'qrcode/qrcode', 'menumanger/menumanger', 'qrcodemanger/qrcodemanger', 'reststatus/reststatus'],
+        img_title: ['打印机', '餐厅信息', '管理桌码', '菜品管理', '扫码结账', '营业状态'],
+        urls: ['print/print', 'restinfo/restinfo', 'tablecode/tablecode', 'menumanger/menumanger', 'scancodepay/scancodepay', 'reststatus/reststatus'],
         tabs: ["全部订单", "退单", "未结账订单"],
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
         //未处理数据
-        untreated_data: [] ,
+        untreated_data: [],
         //已处理，原始数据，后台获取
         data: [{
             'show': -1,
@@ -113,7 +113,7 @@ Page({
         }
         ]
     },
-    onLoad: function () {
+    onLoad: function (opt) {
         var that = this;
         wx.getSystemInfo({
             success: function (res) {
@@ -123,6 +123,9 @@ Page({
                     windowHeight: res.windowHeight
                 });
             }
+        })
+        this.setData({
+            shop_id: opt.shop_id
         })
     },
 

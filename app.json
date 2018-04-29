@@ -1,6 +1,5 @@
 {
     "pages": [
-        
         "pages/index/index",
         "pages/example/button/button",
         
@@ -11,8 +10,8 @@
         "pages/information/editinf/editinf",
         "pages/main/index/index",
         "pages/main/manger/restinfo/restinfo",
-        "pages/main/manger/qrcode/qrcode",
-        "pages/main/manger/qrcodemanger/qrcodemanger",
+        "pages/main/manger/tablecode/tablecode",
+        "pages/main/manger/scancodepay/scancodepay",
         "pages/main/manger/menumanger/menumanger",
         "pages/main/manger/reststatus/reststatus",
         "pages/main/manger/print/print",
@@ -21,13 +20,14 @@
         "pages/main/setting/account/account",
         "pages/main/setting/account/changepwd/changepwd",
         "pages/main/setting/account/changeaccount/changeaccount",
-        "pages/main/setting/notify/notify"
+        "pages/main/setting/notify/notify",
+        "pages/main/manger/menumanger/addfood/addfood"
     ],
     "window": {
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "vc点餐",
-        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#427eec",
+        "navigationBarTextStyle": "white",
         "backgroundColor": "#f8f8f8"
     }
 }

@@ -59,7 +59,7 @@ page {
 }
 .right{
     position: absolute;
-    width: 250% ;
+    width: 150% ;
     top: 0;
     left: 100%;
     height: 100%;
