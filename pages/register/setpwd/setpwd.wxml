@@ -10,7 +10,7 @@
                     <view class="weui-label">密码</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" name='code' placeholder="8-12位，数字/字母/字符组合" bindinput="checkPwd" maxlength='12' />
+                    <input class="weui-input" name='password' placeholder="8-12位，数字/字母/字符组合" bindinput="checkPwd" maxlength='12' />
                 </view>
             </view>
         </view>
