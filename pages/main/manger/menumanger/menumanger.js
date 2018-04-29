@@ -9,47 +9,47 @@ Page({
         //菜品列表
         food_data: [{
             'id': '1',
-            'image': 'https://viczhou.cn/zhou/1_.png',
+            'image': 'https://viczhou.cn/test.jpg',
             'price': 175,
             'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
         }, {
             'id': '2',
-            'image': 'https://viczhou.cn/zhou/1_.png',
+            'image': 'https://viczhou.cn/test.jpg',
             'price': 275,
             'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
         }, {
             'id': '3',
-            'image': 'https://viczhou.cn/zhou/1_.png',
+            'image': 'https://viczhou.cn/test.jpg',
             'price': 375,
             'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
         }, {
             'id': '4',
-            'image': 'https://viczhou.cn/zhou/1_.png',
+            'image': 'https://viczhou.cn/test.jpg',
             'price': 475,
             'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
         }, {
             'id': '5',
-            'image': 'https://viczhou.cn/zhou/1_.png',
+            'image': 'https://viczhou.cn/test.jpg',
             'price': 575,
             'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
         }, {
             'id': '6',
-            'image': 'https://viczhou.cn/zhou/1_.png',
+            'image': 'https://viczhou.cn/test.jpg',
             'price': 675,
             'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
         }, {
             'id': '7',
-            'image': 'https://viczhou.cn/zhou/1_.png',
+            'image': 'https://viczhou.cn/test.jpg',
             'price': 775,
             'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
         }, {
             'id': '8',
-            'image': 'https://viczhou.cn/zhou/1_.png',
+            'image': 'https://viczhou.cn/test.jpg',
             'price': 875,
             'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
         }, {
             'id': '9',
-            'image': 'https://viczhou.cn/zhou/1_.png',
+            'image': 'https://viczhou.cn/test.jpg',
             'price': 975,
             'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
         }],

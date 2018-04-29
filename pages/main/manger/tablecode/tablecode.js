@@ -2,7 +2,7 @@ Page({
     data: {
         hiddenmodalput: true,
         hiddenmodalcode:true,
-        table_code: [{ 'table': '1', 'code_src': 'https://pan.baidu.com/box-static/disk-header/header/img/star@2x.png?t=1521599641001' }, { 'table': '2', 'code_src': '/images/ceshi/qr.png' }, { 'table': '3', 'code_src': '/images/ceshi/qr.png' }, { 'table': '4', 'code_src': '/images/ceshi/qr.png' }, { 'table': '1568', 'code_src': 'https://pan.baidu.com/box-static/disk-header/header/img/star@2x.png?t=1521599641001' }]
+        table_code: [ { 'table': '2', 'code_src': '/images/ceshi/qr.png' }, { 'table': '3', 'code_src': '/images/ceshi/qr.png' }, { 'table': '4', 'code_src': '/images/ceshi/qr.png' }]
     },
 
     onLoad: function () {
@@ -86,7 +86,7 @@ Page({
             /////////
             //success:function()生成成功显示二维码{
             let table_code = this.data.table_code
-            table_code.push({ 'table': this.data.modalInput, 'code_src': 'https://pan.baidu.com/box-static/disk-header/header/img/star@2x.png?t=1521599641001' })
+            table_code.push({ 'table': this.data.modalInput, 'code_src': 'https://qr.api.cli.im/qr?data=%E5%91%B5%E5%91%B5&level=H&transparent=true&bgcolor=%23FFFFFF&forecolor=&blockpixel=12&marginblock=2&logourl=%2F%2Foss-cn-hangzhou.aliyuncs.com%2Fpublic-cli%2Ffree%2F99653a68678413feaefe005c13cda2f81523608540.png&size=400&text=&logoshape=rect&fontsize=30&fontfamily=msyh.ttf&fontcolor=&incolor=%2339b778&outcolor=%23003562&background=images%2Fbackground%2Fbg18.png&qrcode_eyes=pin-3.png&wper=0.66&hper=0.66&lper=0.17&tper=0.12&eye_use_fore=1&qrpad=10&kid=cliim&key=33a31cd0655ff313ddae573cf55c5cda' })
             wx.showToast({
                 title: '生成成功',
                 duration:1000
