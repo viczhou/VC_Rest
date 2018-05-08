@@ -6,6 +6,7 @@ Page({
         hiddenmodalput: true,
         hiddenDeleteToast: true,
         modalInputValue: '',
+
         //菜品列表
         food_data: [{
             'id': '1',
@@ -62,45 +63,82 @@ Page({
     //刷新页面
     onShow: function () {
         //请求菜品
-        /////
-        /////
-        ///
+        //  wx.request({
+        //     url: 'https://viczhou.cn/vc_rest/food/getFood',
+        //     method: 'POST',
+        //     header: {
+        //         'content-type': 'application/x-www-form-urlencoded' // 默认值
+        //     },
+        //     data:{
+        //         menu_id: this.data.menu_data[0].menu_id
+        //     },
+        //     success:function(res){
+        //         console.log(res.data)
+        //     }
+        // })
 
     },
     onLoad: function (opt) {
         let that = this
-        //拿的店铺id
 
-        console.log(opt.shop_id)
-        this.setData({
-            shop_id: opt.shop_id
-        })
-
-        wx.getStorage({
-            key: 'menu_data',
+        wx.request({
+            url: 'https://viczhou.cn/vc_rest/shop_menu/getMenu',
+            method: 'POST',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            data: {
+                shop_id: wx.getStorageSync('shop_id')
+            },
             success: function (res) {
-                if (res.data !== '') {
-                    that.setData({
-                        menu_data: res.data
-                    })
-                }
-            }
-        })
-        //ssss请求拿data
+                wx.setStorageSync('menu_data', res.data.menu)
+                that.setData({
+                    menu_data: res.data.menu
+                })
 
+                wx.request({
+                    url: 'https://viczhou.cn/vc_rest/food/getFood',
+                    method: 'POST',
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded' // 默认值
+                    },
+                    data: {
+                        menu_id: this.data.menu_data[0].menu_id
+                    },
+                    success: function (res) {
+                        this.setData({
+                            food_data: res.data.data
+                        })
+                    }.bind(this)
+                })
+            }.bind(this)
+        })
     },
     menuClick: function (e) {
         if (this.data.flag != e.currentTarget.dataset.idx) {
             this.setData({
                 flag: e.currentTarget.dataset.idx
             })
-
             //请求数据
-            //
-            //
-            ////
+            wx.request({
+                url: 'https://viczhou.cn/vc_rest/food/getFood',
+                method: 'POST',
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded' // 默认值
+                },
+                data: {
+                    menu_id: this.data.menu_data[this.data.flag].menu_id
+                },
+                success: function (res) {
+
+                    if (res.data.msg == 0) {
+                        this.setData({
+                            food_data: res.data.data
+                        })
+                    }
+                }.bind(this)
+            })
         }
-        //console.log('点击了'+e.currentTarget.dataset.idx)
     },
     //更改input值
     changeMenuInput: function (e) {
@@ -108,13 +146,13 @@ Page({
 
         let data = this.data.menu_data
 
-        data[e.currentTarget.dataset.idx] = e.detail.value
-
-        //更新后台数据
-        //////
-        //////
-        //////
-        ///////////////////////////
+        data[e.currentTarget.dataset.idx].menu_name = e.detail.value
+        this.setData({
+            flag: e.currentTarget.dataset.idx
+        })
+     /////////////////////////////////
+     ////////////////////////////
+     ////////////////////////////////
         let that = this
         wx.setStorage({
             key: 'menu_data',
@@ -133,23 +171,26 @@ Page({
     },
     //点击删除
     deleteMenu: function (e) {
-        console.log('删除' + e.currentTarget.dataset.idx)
-
-        let data = this.data.menu_data
-
-        data.splice(e.currentTarget.dataset.idx, 1)
-
-        ///更新服务器数据,删除
-        /////////
-        //
-        ///////////////////
-
+        console.log(this.data.menu_data[e.currentTarget.dataset.idx].menu_id)
+        //更新服务器数据,删除
+        wx.request({
+            url: 'https://viczhou.cn/vc_rest/shop_menu/delete',
+            method: 'POST',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            data: {
+                menu_id: this.data.menu_data[e.currentTarget.dataset.idx].menu_id
+            }
+        })
+        let menu = this.data.menu_data
+        menu.splice(e.currentTarget.dataset.idx, 1)
         wx.setStorage({
             key: 'menu_data',
-            data: data
+            data: menu
         })
         this.setData({
-            menu_data: data
+            menu_data: menu
         })
     },
     edit_menuClick: function (e) {
@@ -157,8 +198,6 @@ Page({
             menu_isdisable: !this.data.menu_isdisable,
             edit_menuMsg: !this.data.menu_isdisable ? '编辑' : '完成编辑'
         })
-
-        //将分类更新到服务器
     },
     //添加分类
     addMenuClass: function () {
@@ -178,7 +217,7 @@ Page({
             })
         } else {
             wx.navigateTo({
-                url: '/pages/main/manger/menumanger/addfood/addfood?flag=' + this.data.flag + '&menu=' + this.data.menu_data,
+                url: '/pages/main/manger/menumanger/addfood/addfood?flag=' + this.data.flag + '&menu=' + JSON.stringify(this.data.menu_data),
             })
         }
     },
@@ -204,8 +243,10 @@ Page({
     },
     editFood: function (e) {
         let food = this.data.food_data[e.currentTarget.dataset.idx]
+
+        console.log(food)
         wx.navigateTo({
-            url: '/pages/main/manger/menumanger/addfood/addfood?flag=' + this.data.flag + '&menu=' + this.data.menu_data + '&food_img=' + food.image + '&food_price=' + food.price + '&food_title=' + food.name + '&food_id=' + food.id,
+            url: '/pages/main/manger/menumanger/addfood/addfood?flag=' + this.data.flag + '&menu=' + JSON.stringify(this.data.menu_data) + '&food_img=' + food.foodImg + '&food_price=' + food.foodPrice + '&food_title=' + food.foodName + '&food_id=' + food.id,
         })
 
     },
@@ -222,24 +263,30 @@ Page({
                 hiddenmodalput: true
             })
 
-            let that = this
-            let data = this.data.menu_data
+            wx.request({
+                url: 'https://viczhou.cn/vc_rest/shop_menu/add',
+                method: 'POST',
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded' // 默认值
+                },
+                data: {
+                    shop_id: wx.getStorageSync('shop_id'),
+                    menu_content: this.data.modalInput
+                },
+                success: function (res) {
 
-            data.push(this.data.modalInput)
-            //采用缓存，避免要从服务器取，及时显示
-            wx.setStorage({
-                key: 'menu_data',
-                data: data
+                    let data = this.data.menu_data
+                    data.push({ 'menu_id': res.data.menu_id, 'menu_name': this.data.modalInput })
+                    wx.setStorage({
+                        key: 'menu_data',
+                        data: data
+                    })
+
+                    this.setData({
+                        menu_data: data
+                    })
+                }.bind(this)
             })
-
-            this.setData({
-                menu_data: data
-            })
-
-            //更新到后台,添加分类
-            ////
-            ////
-            /////////
 
         } else {
             wx.showToast({

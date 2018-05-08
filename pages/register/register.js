@@ -81,10 +81,9 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: function (res) {
-                //res.data.msg != 0
-                let a = 1
-                console.log(res.data)
-                if (a != 1) {
+
+                let a = res.data.msg
+                if (a == 1) {
                     wx.showToast({
                         title: '验证码错误！',
                         icon: 'none',

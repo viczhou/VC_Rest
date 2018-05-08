@@ -3,11 +3,34 @@ Page({
     longitude: '',
     latitude: '',
     data: {
-        files: 'https://viczhou.cn/zhou/1_.png',
+        files: 'https://viczhou.cn/test.jpg',
         shop_address: ''
     },
     onLoad: function () {
+        wx.request({
+            url: 'https://viczhou.cn/vc_rest/shop/getShopInfo',
+            method: 'POST',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            data: {
+                shop_id: wx.getStorageSync('shop_id')
+            },
+            success: function (res) {
+                console.log(res.data)
+                if (res.data.msg == 0) {
+                    this.latitude = res.data.atitude
+                    this.longitude = res.data.longitude
+                    this.setData({
+                        files: 'https://viczhou.cn/vc_rest/' + res.data.shop_img,
+                        shop_address: res.data.shop_address,
+                        shop_name: res.data.shop_name,
+                        shop_phone: res.data.shop_phone,
 
+                    })
+                }
+            }.bind(this)
+        })
     },
     mapClick: function () {
         var that = this
@@ -59,16 +82,58 @@ Page({
         });
     },
     formSubmit: function (e) {
-        if (e.detail.value.shop_name !== '' && e.detail.value.shop_phone !== '' && e.detail.value.shop_licence !== '' && this.data.files !== undefined) {
-            ////////请求
 
-            wx.showToast({
-                title: '更改成功！',
+        if (e.detail.value.shop_name !== '' && e.detail.value.shop_phone !== '' && this.data.files !== undefined) {
+
+            wx.uploadFile({
+                url: 'https://viczhou.cn/vc_rest/shop/uploadImag',
+                filePath: this.data.files[0],
+                name: 'file_name',
+                formData: {
+                    'flag': 0,
+                },
+                success: function (res) {
+                    let image_src = JSON.parse(res.data).img_src
+                    ////////请求
+                    wx.request({
+                        url: 'https://viczhou.cn/vc_rest/shop/change',
+                        method: 'POST',
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded' // 默认值
+                        },
+                        data: {
+                            shop_id: wx.getStorageSync('shop_id'),
+                            shop_name: e.detail.value.shop_name,
+                            'shop_phone': e.detail.value.shop_phone,
+                            'resp_name': e.detail.value.resp_name,
+                            'resp_phone': e.detail.value.resp_phone,
+                            'shop_address': e.detail.value.shop_address,
+                            'longitude': this.longitude, //经度
+                            'latitude': this.latitude, //纬度
+                            'shop_img': image_src
+                        },
+                        success: function (e) {
+                            if (e.data.msg == 0) {
+                                wx.showToast({
+                                    title: '更新成功',
+                                })
+                                setTimeout(function(){
+                                    wx.reLaunch({
+                                        url: '/pages/main/index/index',
+                                    })
+                                },1200)
+                            }
+                        }
+                    })
+
+                    wx.showToast({
+                        title: '更改成功！',
+                    })
+                    setTimeout(function () {
+                        wx.navigateBack()
+                    }.bind(this), 1500)
+                }.bind(this)
             })
-            setTimeout(function () {
-                wx.navigateBack()
-            }.bind(this), 1500)
-
         } else {
             wx.showToast({
                 title: '请填写完必填信息后提交',

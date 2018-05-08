@@ -3,7 +3,7 @@
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
             <view class="weui-cell__bd">
-                <input class="weui-input" name="phone" placeholder="请输入原密码" value="{{phone}}" maxlength='12' />
+                <input class="weui-input" name="old_password" placeholder="请输入原密码" value="{{phone}}" maxlength='12' />
             </view>
         </view>
     </view>
@@ -11,7 +11,7 @@
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
             <view class="weui-cell__bd">
-                <input class="weui-input" name="phone" placeholder="请输入新密码" value="{{phone}}" maxlength='12' />
+                <input class="weui-input" name="new_password" placeholder="请输入新密码" value="{{phone}}" maxlength='12' />
             </view>
         </view>
     </view>

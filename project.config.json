@@ -30,13 +30,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "11",
-					"pathName": "pages/main/manger/restinfo/restinfo",
+					"pathName": "pages/main/index/index",
 					"query": ""
 				},
 				{

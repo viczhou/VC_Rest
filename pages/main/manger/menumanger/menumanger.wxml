@@ -1,7 +1,7 @@
 <view class='menu_list'>
     <scroll-view style='height:100%' scroll-y>
         <block wx:for="{{menu_data}}" wx:key="{{*this}}">
-            <input class="{{index == flag ? 'menu_data_active' : 'menu_data'}}" bindtap='menuClick' data-idx='{{index}}' value="{{item}}" disabled="{{menu_isdisable}}" />
+            <input class="{{index == flag ? 'menu_data_active' : 'menu_data'}}" bindtap='menuClick' data-idx='{{index}}' value="{{item.menu_name}}" disabled="{{menu_isdisable}}" />
         </block>
 
         <button class="weui-btn add-menu" type="primary" plain="true" bindtap='edit_menuClick'>{{edit_menuMsg}}</button>
@@ -15,7 +15,7 @@
             <block wx:for="{{menu_data}}" wx:key="{{*this}}">
                 <view>
                     <image src='/images/delete.png' class='delete-image' bindtap='deleteMenu' data-idx='{{index}}' />
-                    <input class="{{index == flag ? 'menu_data_active_edit' : 'menu_data_edit'}}" bindblur='changeMenuInput' bindtap='menuClick' data-idx='{{index}}' value="{{item}}" disabled="{{menu_isdisable}}" maxlength='5' />
+                    <input class="{{index == flag ? 'menu_data_active_edit' : 'menu_data_edit'}}" bindblur='changeMenuInput' bindtap='menuClick' data-idx='{{index}}' value="{{item.menu_name}}" disabled="{{menu_isdisable}}" maxlength='5' />
                 </view>
             </block>
             <button class="weui-btn add-menu" type="primary" plain="true" bindtap='addMenuClass'>添加</button>
@@ -34,9 +34,9 @@
         <button class="weui-btn add-food" type="primary" plain="true" bindtap='addFood'>添加</button>
         <block wx:for="{{food_data}}" wx:key="{{*this}}">
             <view class=" {{index == 0 ? 'menu-food border-top' : 'menu-food'}}">
-                <image src="{{item.image}}" class="menu-image" />
-                <view class="menu-title">{{item.name}}</view>
-                <view class="menu-price">￥{{item.price}}</view>
+                <image src="{{item.foodImg}}" class="menu-image" />
+                <view class="menu-title">{{item.foodName}}</view>
+                <view class="menu-price">￥{{item.foodPrice}}</view>
                 <view class="menu-btn-box">
                     <button data-idx='{{index}}' bindtap='editFood' class="weui-btn menu-btn" type="primary" plain="true">编辑</button>
                     <button data-idx='{{index}}' bindtap='isDeleteFood' class="weui-btn menu-btn" type="default" plain="true">删除</button>

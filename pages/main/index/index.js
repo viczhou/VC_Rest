@@ -1,5 +1,6 @@
 var sliderWidth = 96;
-
+let page = 1
+let shop_id = -1
 Page({
     data: {
         active: 1,
@@ -24,94 +25,14 @@ Page({
             'price': '425.00',
             'time': '2018-03-15 15:30:20',
             'pid': '2018030500441',
-            'order_detail': [{
+            'detail': [{
                 'image': 'https://viczhou.cn/zhou/1_.png',
                 'count': 1,
                 'price': 75,
                 'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
-            },
-            {
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 3,
-                'price': 5,
-                'name': '超级网红大白菜'
-            },
-            {
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 12,
-                'price': 15,
-                'name': '网红版脏脏包'
-            },
-            {
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 2,
-                'price': 15,
-                'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
-            }]
-        },
-        {
-            'show': -1,
-            'table': 9,
-            'price': '425.00',
-            'time': '2018-03-15 15:30:20',
-            'pid': '2018030500441',
-            'order_detail': [{
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 1,
-                'price': 75,
-                'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
-            },
-            {
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 3,
-                'price': 5,
-                'name': '超级网红大白菜'
-            },
-            {
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 12,
-                'price': 15,
-                'name': '网红版脏脏包'
-            },
-            {
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 2,
-                'price': 15,
-                'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
-            }]
-        },
-        {
-            'show': -1,
-            'table': 9,
-            'price': '425.00',
-            'time': '2018-03-15 15:30:20',
-            'pid': '2018030500441',
-            'order_detail': [{
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 1,
-                'price': 75,
-                'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
-            },
-            {
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 3,
-                'price': 5,
-                'name': '超级网红大白菜'
-            },
-            {
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 12,
-                'price': 15,
-                'name': '网红版脏脏包'
-            },
-            {
-                'image': 'https://viczhou.cn/zhou/1_.png',
-                'count': 2,
-                'price': 15,
-                'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
-            }]
-        }
-        ]
+            }
+            ]
+        }]
     },
     onLoad: function (opt) {
         var that = this;
@@ -124,8 +45,9 @@ Page({
                 });
             }
         })
+        shop_id = wx.getStorageSync('shop_id')
         this.setData({
-            shop_id: opt.shop_id
+            shop_id: shop_id
         })
     },
 
@@ -146,6 +68,53 @@ Page({
         wx.setNavigationBarTitle({
             title: msg[num - 1]
         })
+
+        if (num == 1) {
+
+        } else if (num == 2) {
+            wx.request({
+                url: 'https://viczhou.cn/vc_rest/order/getShopOrderPage',
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                data: {
+                    'shop_id': shop_id,
+                    'limit': 50,
+                    'page': page,
+                    'desc': 0
+                },
+                success: function (res) {
+                    let data = res.data
+                    let time
+
+                    for (let i = 0; i < data.length; i++) {
+                        time = data[i].time.replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
+                        data[i].pid = time + data[i].order_id
+                    }
+                    this.setData({
+                        data: data
+                    })
+                }.bind(this)
+            })
+        } else if (num == 3) {
+            wx.request({
+                url: 'https://viczhou.cn/vc_rest/order/getShopOrderCount',
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                data:{
+                    shop_id:shop_id
+                },
+                success:function(res){
+                    this.setData({
+                        total_money: res.data.total_sales,
+                        oder_num: res.data.order_count
+                    })
+                }.bind(this)
+            })
+        }
     },
     makePhone: function () {
         wx.makePhoneCall({
@@ -172,7 +141,6 @@ Page({
     },
     //上拉刷新
     onReachBottom: function () {
-        console.log(1)
         this.setData({
             data: this.data.data.concat([{
                 'show': -1,

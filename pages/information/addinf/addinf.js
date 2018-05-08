@@ -58,11 +58,6 @@ Page({
     },
     formSubmit: function (e) {
         let shop_id = 0
-        //提交服务器 ，获取返回的shop_id
-
-
-
-        /////
         
         if (e.detail.value.shop_name !== '' && e.detail.value.shop_phone !== '' && e.detail.value.shop_licence !== '' && this.data.files !== undefined) {
             let that = this
@@ -97,12 +92,19 @@ Page({
                         },
                         success: function (res) {
                             console.log(res)
-                            wx.redirectTo({
-                                url: '/pages/main/index/index',
-                            })
+                            if( res.data.msg == 0 ){
+                                wx.setStorage({
+                                    key: 'shop_id',
+                                    data: res.data.shop_id
+                                })
+                                wx.redirectTo({
+                                    url: '/pages/main/index/index',
+                                })
+                            }
+                           
                         }
                     })
-                }
+                }.bind(this)
             })
 
         } else {

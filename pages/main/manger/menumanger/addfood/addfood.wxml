@@ -33,8 +33,8 @@
                         <view class='require'>*</view>所属菜单</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <picker bindchange="bindPickerChange" range="{{menu}}">
-                        <input name="menu" class="weui-input" disabled value='{{menuPicker}}'/>
+                    <picker bindchange="bindPickerChange" range="{{menu_name}}">
+                        <input name="menu" class="weui-input" disabled value='{{menuPicker}}' />
                     </picker>
                 </view>
             </view>
@@ -44,7 +44,7 @@
                         <view class='require'>*</view>标题</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" name='food_title' placeholder="请输入标题" maxlength='15' value='{{food_title}}'/>
+                    <input class="weui-input" name='food_title' placeholder="请输入标题" maxlength='15' value='{{food_title}}' />
                 </view>
             </view>
 
@@ -54,7 +54,7 @@
                         <view class='require'>*</view>价格</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" name='food_price' placeholder="请输入价格"  maxlength='6' type="number" value='{{food_price}}' />
+                    <input class="weui-input" name='food_price' placeholder="请输入价格" maxlength='6' type="number" value='{{food_price}}' />
                 </view>
             </view>
         </view>
