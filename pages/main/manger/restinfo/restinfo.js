@@ -8,7 +8,26 @@ Page({
     },
     onLoad:function(){
         //请求接口拿信息数据
-       
+       wx.request({
+           url: 'https://viczhou.cn/vc_rest/shop/getShopInfo',
+           header: {
+               'content-type': 'application/x-www-form-urlencoded'
+           },
+           method: 'POST',
+           data:{
+               shop_id:wx.getStorageSync('shop_id')
+           },
+           success:function(res){
+               if(res.data.msg == 0){
+                   let latitude =  res.data.atitude
+                   let longitude =  res.data.longitude
+                   this.setData({
+                       rest_info:res.data ,
+                       markers: [{ 'latitude': latitude, 'longitude': longitude }]
+                   })
+               }
+           }.bind(this)
+       })
     },
     showMap:function(){
         wx.openLocation({

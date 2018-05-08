@@ -150,9 +150,9 @@ Page({
         this.setData({
             flag: e.currentTarget.dataset.idx
         })
-     /////////////////////////////////
-     ////////////////////////////
-     ////////////////////////////////
+        /////////////////////////////////
+        ////////////////////////////
+        ////////////////////////////////
         let that = this
         wx.setStorage({
             key: 'menu_data',
@@ -231,15 +231,34 @@ Page({
 
         ////////请求
         //删除food            console.log(e.currentTarget.dataset.idx)
-        /////////
-
-        let data = this.data.food_data
-        data.splice(idx_flag, 1)
-
+        wx.request({
+            url: 'https://viczhou.cn/vc_rest/food/delete',
+            method: 'POST',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            data: {
+                food_id: this.data.food_data[idx_flag].id
+            },
+            success: function (res) {
+                if (res.data.msg == 0) {
+                    wx.showToast({
+                        title: '删除成功',
+                        icon:'none',
+                        duration:800
+                    })
+                    let data = this.data.food_data
+                    data.splice(idx_flag, 1)
+                    this.setData({
+                        food_data: data,
+                    })
+                }
+            }.bind(this)
+        })
         this.setData({
-            food_data: data,
             hiddenDeleteToast: true
         })
+
     },
     editFood: function (e) {
         let food = this.data.food_data[e.currentTarget.dataset.idx]

@@ -1,1 +1,53 @@
+<view class="page" wx:if="{{showToast}}">
+    <view class="weui-msg">
+        <view class="weui-msg__icon-area">
+            <icon type="warn" size="93"></icon>
+        </view>
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__title">打印机未连接</view>
+            <view class="weui-msg__desc">请调试你的打印机设置</view>
+        </view>
+        <view class="weui-msg__opr-area">
+            <view class="weui-btn-area">
+                <button class="weui-btn" bindtap="confirmToast" type="primary">确定</button>
+            </view>
+        </view>
+        <view class="weui-msg__extra-area">
+            <view class="weui-footer">
 
+                <view class="weui-footer__text">Copyright © 2018 viczhou</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{!showToast}}">
+    <view wx:if="{{isOpenBluetooth}}">
+        <view class='status'>
+            <image src='/images/print_open.png' class="image"></image>
+            <view class='tip1'>正在搜索打印机</view>
+            <view class='tip2'>搜索到的打印机会显示在下方</view>
+        </view>
+        <view  style="margin-top:10px">
+            <view wx:if="{{search}}" style="text-align:center;margin-top:10px;">
+                搜索中...
+            </view>
+
+            <view wx:for="{{data}}">
+                <view class='device' bindtap='clickDevice'>
+                    <view wx:if="{{item.name != ''}}">{{item.name}}</view>
+                    <view wx:else> {{item.deviceId}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:else class='status'>
+        <image src='/images/print_close.png' class="image"></image>
+        <view class='tip1'>蓝牙功能未打开</view>
+        <view class='tip2'>要连接打印机，请先打开手机蓝牙功能</view>
+
+        <view class='tip3'>
+            <view class='text'>1. 进入手机设置，开启蓝牙</view>
+            <view class='text'>2. 重新进入该页面</view>
+        </view>
+    </view>
+</view>

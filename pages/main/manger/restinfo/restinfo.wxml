@@ -35,4 +35,4 @@
     </view>
 </view>
 
-<map class="map" show-location='true' markers="{{markers}}" longitude='{{rest_info.longitude}}' latitude='{{rest_info.latitude}}' bindtap='showMap'></map>
+<map class="map" show-location='true' markers="{{markers}}" longitude='{{rest_info.longitude}}' latitude='{{rest_info.atitude}}' bindtap='showMap'></map>
