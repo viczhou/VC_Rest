@@ -35,6 +35,10 @@ Page({
         }]
     },
     onLoad: function (opt) {
+        setInterval(function () {
+            console.log(12)
+        }, 1000)
+
         var that = this;
         wx.getSystemInfo({
             success: function (res) {
@@ -52,10 +56,90 @@ Page({
     },
 
     topbarClick: function (e) {
+        if (e.currentTarget.id == 2) {
+            wx.request({
+                url: 'https://viczhou.cn/vc_rest/order/getShopOrderPage',
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                data: {
+                    'shop_id': shop_id,
+                    'limit': 50,
+                    'page': page,
+                    'desc': 2
+                },
+                success: function (res) {
+                    let data = res.data
+                    let time
+
+                    for (let i = 0; i < data.length; i++) {
+                        time = data[i].time.replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
+                        data[i].pid = time + data[i].order_id
+                    }
+                    this.setData({
+                        data: data
+                    })
+                }.bind(this)
+            })
+        } else if (e.currentTarget.id == 1) {
+            wx.request({
+                url: 'https://viczhou.cn/vc_rest/order/getShopOrderPage',
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                data: {
+                    'shop_id': shop_id,
+                    'limit': 50,
+                    'page': page,
+                    'desc': 3
+                },
+                success: function (res) {
+                    let data = res.data
+                    let time
+                    for (let i = 0; i < data.length; i++) {
+                        time = data[i].time.replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
+                        data[i].pid = time + data[i].order_id
+                    }
+                    this.setData({
+                        data: data
+                    })
+                }.bind(this)
+            })
+        } else if (e.currentTarget.id == 0) {
+            wx.request({
+                url: 'https://viczhou.cn/vc_rest/order/getShopOrderPage',
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                data: {
+                    'shop_id': shop_id,
+                    'limit': 50,
+                    'page': page,
+                    'desc': 1
+                },
+                success: function (res) {
+                    let data = res.data
+                    let time
+
+                    for (let i = 0; i < data.length; i++) {
+                        time = data[i].time.replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
+                        data[i].pid = time + data[i].order_id
+                    }
+                    this.setData({
+                        data: data
+                    })
+                }.bind(this)
+            })
+        }
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id
         });
+
+
     },
     tabBarClick: function (e) {
         var bar = wx.getSystemInfoSync().windowWidth / 4
@@ -82,7 +166,7 @@ Page({
                     'shop_id': shop_id,
                     'limit': 50,
                     'page': page,
-                    'desc': 0
+                    'desc': 1
                 },
                 success: function (res) {
                     let data = res.data
@@ -104,10 +188,10 @@ Page({
                     'content-type': 'application/x-www-form-urlencoded'
                 },
                 method: 'POST',
-                data:{
-                    shop_id:shop_id
+                data: {
+                    shop_id: shop_id
                 },
-                success:function(res){
+                success: function (res) {
                     this.setData({
                         total_money: res.data.total_sales,
                         oder_num: res.data.order_count

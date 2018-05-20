@@ -3,20 +3,7 @@ Page({
     },
     onLoad: function (opt) {
         let that = this
-        // wx.request({
-        //     //'url':'https://viczhou.cn/aaaa/test',
-        //     url:'https://cli.im/api/qrcode/code?text=呵呵&&mhid=5hbOCw/uk8IhMHcqKtdRPKw',  //网页
-        //     //url:'https://pan.baidu.com/share/qrcode?w=150&h=150&url=你的内容', //二进制
-        //     success: function (res) {
-        //         let result = /qrcode_plugins_img ="(.*?)"/g
-        //         let a = result.exec(res.data)[1]
-        //         let b = new Array(a)
-        //         console.log(b)
-        //         that.setData({
-        //             files: b
-        //         })
-        //     }
-        // })
+       
         //new EventSource('https://viczhou.cn/aaaa/test')
 
         let menu_array = JSON.parse(opt.menu)
@@ -153,6 +140,7 @@ Page({
                     })
                     //添加接口
                 } else {
+                    console.log("qqqqqqq" + image_src)
                     //调用更新接口
                     wx.request({
                         url: 'https://viczhou.cn/vc_rest/food/update',

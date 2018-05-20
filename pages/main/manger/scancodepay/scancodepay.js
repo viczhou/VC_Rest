@@ -26,18 +26,44 @@ Page({
                 //判断格式以及shop_id   shop_id后面加
                 if (result === 'error') {
                     wx.showToast({
-                        title: '请扫描本店订单生成的二维码',
+                        title: '二维码错误',
                         icon: 'none'
                     })
                     setTimeout(function () {
                         wx.navigateBack({})
                     }, 1500)
                 }
-
-                //放请求回调中
-                that.setData({
-                    hasLoading: true
+                if (result.shop_id != wx.getStorageSync("shop_id")) {
+                    wx.showToast({
+                        title: '请扫描本店订单二维码',
+                        icon: 'none'
+                    })
+                    setTimeout(function () {
+                        wx.navigateBack({})
+                    }, 1500)
+                }
+                wx.request({
+                    url: 'https://viczhou.cn/vc_rest/order/getOrderDetail',
+                    method: 'POST',
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded' // 默认值
+                    },
+                    data: {
+                        order_id: result.order_id
+                    },
+                    success: function (res) {
+                        console.log(res.data)
+                        if (res.data.msg == 0) {
+                            //放请求回调中
+                            that.setData({
+                                hasLoading: true ,
+                                order_data:res.data ,
+                                order_pid: res.data.order_time.substring(2).replace("-", "").replace("-", "").replace(" ", "").replace(":", "").replace(":", "") + result.order_id
+                            })
+                        }
+                    }
                 })
+
             },
             fail: function () {
 

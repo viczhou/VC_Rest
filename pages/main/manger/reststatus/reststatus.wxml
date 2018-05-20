@@ -3,7 +3,7 @@
     <view class="weui-cell weui-cell_switch">
         <view class="weui-cell__bd">{{status}}</view>
         <view class="weui-cell__ft">
-            <switch checked bindchange='status'/>
+            <switch checked="{{check}}" bindchange='status'/>
         </view>
     </view>
 </view>

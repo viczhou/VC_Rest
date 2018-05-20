@@ -1,16 +1,29 @@
 Page({
     data: {
         hiddenmodalput: true,
-        hiddenmodalcode:true,
-        table_code: [ { 'table': '2', 'code_src': '/images/ceshi/qr.png' }, { 'table': '3', 'code_src': '/images/ceshi/qr.png' }, { 'table': '4', 'code_src': '/images/ceshi/qr.png' }]
+        hiddenmodalcode: true,
+        table_code: [{ 'table': '1', 'code_src': '/images/ceshi/qr.jpg' }, { 'table': '2', 'code_src': '/images/ceshi/qr.jpg' }, { 'table': '3', 'code_src': '/images/ceshi/qr.jpg' }]
     },
 
     onLoad: function () {
         //请求  获取table_code
-        ////////////////
-        //////////////
-        ///////////////////////
-        //////////////
+        wx.request({
+            url: 'https://viczhou.cn/vc/tablecode',
+            method: 'GET',
+            data: {
+
+                'shop_id': wx.getStorageSync("shop_id")
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+                console.log(res.data)
+                this.setData({
+                    table_code: res.data
+                })
+            }.bind(this)
+        })
     },
 
     gridclick: function (e) {
@@ -56,7 +69,7 @@ Page({
         })
 
     },
-    saveNewCode:function(){
+    saveNewCode: function () {
         let len = this.data.table_code.length
         this.saveImage(this.data.table_code[len - 1].code_src)
     },
@@ -69,7 +82,7 @@ Page({
     cancelModal: function () {
         this.setData({
             hiddenmodalput: true,
-            hiddenmodalcode:true
+            hiddenmodalcode: true
         });
     },
     //确认  
@@ -81,21 +94,47 @@ Page({
 
             //console.log(this.data.modalInput)桌号
             //请求后台,添加桌码
-            ////
-            ////生成失败提示
-            /////////
-            //success:function()生成成功显示二维码{
-            let table_code = this.data.table_code
-            table_code.push({ 'table': this.data.modalInput, 'code_src': 'https://qr.api.cli.im/qr?data=%E5%91%B5%E5%91%B5&level=H&transparent=true&bgcolor=%23FFFFFF&forecolor=&blockpixel=12&marginblock=2&logourl=%2F%2Foss-cn-hangzhou.aliyuncs.com%2Fpublic-cli%2Ffree%2F99653a68678413feaefe005c13cda2f81523608540.png&size=400&text=&logoshape=rect&fontsize=30&fontfamily=msyh.ttf&fontcolor=&incolor=%2339b778&outcolor=%23003562&background=images%2Fbackground%2Fbg18.png&qrcode_eyes=pin-3.png&wper=0.66&hper=0.66&lper=0.17&tper=0.12&eye_use_fore=1&qrpad=10&kid=cliim&key=33a31cd0655ff313ddae573cf55c5cda' })
-            wx.showToast({
-                title: '生成成功',
-                duration:1000
+            wx.request({
+                url: 'https://viczhou.cn/vc/tablecode',
+                method: 'POST',
+                data: {
+                    'table_id': this.data.modalInput,
+                    'shop_id': wx.getStorageSync("shop_id")
+                },
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                success: function (res) {
+                    if (res.data.msg == 0) {
+                        let table_code = this.data.table_code
+                        table_code.push({
+                            'table': res.data.table, 'code_src': res.data.code_src
+                        })
+
+                        wx.showToast({
+                            title: '生成成功',
+                            duration: 1000
+                        })
+                        this.setData({
+                            hiddenmodalcode: false,
+                            table_code: table_code
+                        })
+                    }else {
+                        wx.showToast({
+                            title: '已经有该桌码',
+                            duration: 1000,
+                            icon:'none'
+                        })
+                    }
+                }.bind(this),
+                fail:function(){
+                    wx.showToast({
+                        title: '网络错误',
+                        icon:'loading',
+                        duration: 1000
+                    })
+                }
             })
-            this.setData({
-                hiddenmodalcode:false,
-                table_code: table_code
-            })
-            ////////////////////////////}
 
         } else {
             wx.showToast({

@@ -1,8 +1,7 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/example/button/button",
-        
+        "pages/example/badge/badge",
         "pages/register/register",
         "pages/register/dislogin/dislogin",
         "pages/register/setpwd/setpwd",
