@@ -32,14 +32,52 @@ Page({
                 'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
             }
             ]
-        }]
+        }],
     },
     onLoad: function (opt) {
+        let that = this
         setInterval(function () {
-            console.log(12)
-        }, 1000)
+            wx.request({
+                url: 'https://viczhou.cn/vc_rest/order/getShopOrderPage',
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                data: {
+                    'shop_id': wx.getStorageSync('shop_id'),
+                    'limit': 50,
+                    'page': 1,
+                    'desc': 0
+                },
+                success: function (res) {
+                    //console.log(res.data)
+                    console.log(that.data.untreated_data)
+                    let data = res.data
+                    let untreated_data = that.data.untreated_data
+                    let time
+                    let j
+                    for (let i = 0; i < data.length; i++) {
+                        time = data[i].time.substring(2).replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
+                        data[i].pid = time + data[i].order_id
+                  
+                        for (j = 0; j < untreated_data.length ; j ++){
+                            if (untreated_data[j].pid == data[i].pid){
+                                break
+                            }
+                        }
+                        if (j == untreated_data.length){
+                            untreated_data.push(data[i])
+                        }
+                    }
 
-        var that = this;
+
+                    that.setData({
+                        untreated_data: untreated_data
+                    })
+                }.bind(this)
+            })
+        }.bind(this), 1000 * 30)
+
         wx.getSystemInfo({
             success: function (res) {
                 that.setData({
@@ -74,7 +112,7 @@ Page({
                     let time
 
                     for (let i = 0; i < data.length; i++) {
-                        time = data[i].time.replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
+                        time = data[i].time.substring(2).replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
                         data[i].pid = time + data[i].order_id
                     }
                     this.setData({
@@ -99,7 +137,7 @@ Page({
                     let data = res.data
                     let time
                     for (let i = 0; i < data.length; i++) {
-                        time = data[i].time.replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
+                        time = data[i].time.substring(2).replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
                         data[i].pid = time + data[i].order_id
                     }
                     this.setData({
@@ -173,7 +211,7 @@ Page({
                     let time
 
                     for (let i = 0; i < data.length; i++) {
-                        time = data[i].time.replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
+                        time = data[i].time.substring(2).replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
                         data[i].pid = time + data[i].order_id
                     }
                     this.setData({
@@ -214,49 +252,61 @@ Page({
         })
     },
     isOpenDetail: function (e) {
-        var d = e.currentTarget.id
         var data_res = this.data.data
+        if (e.currentTarget.dataset.msg != undefined) {
+            data_res = this.data.untreated_data
+        }
+        var d = e.currentTarget.id
+
 
         data_res[d].show = -data_res[d].show
 
-        this.setData({
-            data: data_res
-        })
+        if (e.currentTarget.dataset.msg != undefined) {
+            this.setData({
+                untreated_data: data_res
+            })
+        } else {
+            this.setData({
+                data: data_res
+            })
+        }
     },
     //上拉刷新
     onReachBottom: function () {
-        this.setData({
-            data: this.data.data.concat([{
-                'show': -1,
-                'table': 9,
-                'price': '425.00',
-                'time': '2018-03-15 15:30:20',
-                'pid': '2018030500441',
-                'order_detail': [{
-                    'image': 'https://viczhou.cn/zhou/1_.png',
-                    'count': 1,
-                    'price': 75,
-                    'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
-                },
-                {
-                    'image': 'https://viczhou.cn/zhou/1_.png',
-                    'count': 3,
-                    'price': 5,
-                    'name': '超级网红大白菜'
-                },
-                {
-                    'image': 'https://viczhou.cn/zhou/1_.png',
-                    'count': 12,
-                    'price': 15,
-                    'name': '网红版脏脏包'
-                },
-                {
-                    'image': 'https://viczhou.cn/zhou/1_.png',
-                    'count': 2,
-                    'price': 15,
-                    'name': '超级麻辣好吃的不得了的牛肉偏偏呀'
-                }]
-            }])
+          
+    },
+    acceptOrder:function(e){
+        let that = this
+        let order_id = e.currentTarget.dataset.id.substring(12)
+        let index = e.currentTarget.dataset.index
+        let table = e.currentTarget.dataset.table
+        let data = this.data.untreated_data
+
+        wx.request({
+            url: 'https://viczhou.cn/vc_rest/order/pay',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: 'POST',
+            data:{
+                order_id: order_id ,
+                status: 1
+            },
+            success:function(res){
+                if(res.data.msg == 0){
+                    data.splice(index,1)
+                    
+                    that.setData({
+                        untreated_data:data
+                    })
+
+                    wx.showToast({
+                        title: '已确认' + table+'号桌订单',
+                        icon:'none'
+                    })
+                }
+            }
         })
+
     }
 })

@@ -17,12 +17,23 @@ Page({
                 shop_id: wx.getStorageSync('shop_id')
             },
             success: function (res) {
-                console.log(res.data)
+                wx.downloadFile({
+                    url: res.data.shop_img, //仅为示例，并非真实的资源
+                    success: function (res) {
+                        if (res.statusCode === 200) {
+                            let filePath = res.tempFilePath
+                            this.setData({
+                                files: new Array(filePath),
+                            })
+                        }
+                    }.bind(this)
+                })
+
                 if (res.data.msg == 0) {
                     this.latitude = res.data.atitude
                     this.longitude = res.data.longitude
                     this.setData({
-                        files: 'https://viczhou.cn/vc_rest/' + res.data.shop_img,
+                        files:res.data.shop_img,
                         shop_address: res.data.shop_address,
                         shop_name: res.data.shop_name,
                         shop_phone: res.data.shop_phone,
@@ -82,7 +93,6 @@ Page({
         });
     },
     formSubmit: function (e) {
-
         if (e.detail.value.shop_name !== '' && e.detail.value.shop_phone !== '' && this.data.files !== undefined) {
 
             wx.uploadFile({
@@ -113,6 +123,7 @@ Page({
                             'shop_img': image_src
                         },
                         success: function (e) {
+                            //console.log(res.data)
                             if (e.data.msg == 0) {
                                 wx.showToast({
                                     title: '更新成功',

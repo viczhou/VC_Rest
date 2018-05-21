@@ -52,33 +52,63 @@ Page({
                         order_id: result.order_id
                     },
                     success: function (res) {
-                        console.log(res.data)
                         if (res.data.msg == 0) {
-                            //放请求回调中
-                            that.setData({
-                                hasLoading: true ,
-                                order_data:res.data ,
-                                order_pid: res.data.order_time.substring(2).replace("-", "").replace("-", "").replace(" ", "").replace(":", "").replace(":", "") + result.order_id
-                            })
+                            if (res.data.order_status == 3) {
+                                 wx.navigateBack({
+                                 })
+                                 wx.showToast({
+                                     title: '结账码已失效,订单已完成',
+                                     icon:'none'
+                                 })
+                            } else {
+                                //放请求回调中
+                                that.setData({
+                                    hasLoading: true,
+                                    order_data: res.data,
+                                    order_pid: res.data.order_time.substring(2).replace("-", "").replace("-", "").replace(" ", "").replace(":", "").replace(":", "") + result.order_id
+                                })
+                            }
                         }
                     }
                 })
 
             },
             fail: function () {
-
                 wx.navigateBack({})
-
             }
         })
-
-        //根据请求数据
-        // wx.request({
-        //     url: '',
-        // })
     },
     formSubmit: function (e) {
         //请求服务器，完成订单
+        wx.request({
+            url: 'https://viczhou.cn/vc_rest/order/pay',
+            method: 'POST',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            data: {
+                order_id: e.detail.value.pid.substring(12),
+                status: 3
+            },
+            success: function (res) {
+                console.log(res)
+                if (res.data.msg == 0) {
+                    wx.showToast({
+                        title: '结账成功',
+                        icon: 'none'
+                    })
+                    setTimeout(function () {
+                        wx.navigateBack({})
+                    }, 800)
+                } else {
+                    wx.showToast({
+                        title: '网络异常',
+                        icon: 'none'
+                    })
+                }
+            }
+        })
+
         //通过订单号提取order_id提交
         console.log(e.detail.value)
     }
