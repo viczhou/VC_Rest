@@ -1,4 +1,14 @@
 Page({
+    data:{
+        shake: wx.getStorageSync('shake'),
+        sound: wx.getStorageSync('sound')
+    },
+    onShow:function(){
+        this.setData({
+            shake: wx.getStorageSync('shake'),
+            sound: wx.getStorageSync('sound')
+        })
+    },
     sound:function(e){
         wx.setStorage({
             key: 'sound',
@@ -7,7 +17,7 @@ Page({
     },
     shake:function(e){
         wx.setStorage({
-            key: 'shock',
+            key: 'shake',
             data: e.detail.value,
         })
     }

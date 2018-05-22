@@ -8,6 +8,7 @@
             <image src='/images/untreated.png' class='image' />
             <view class='tarBar-text'>未处理</view>
         </block>
+        <view class="weui-badge" wx:if="{{untreated_data.length != 0}}" style="position:absolute;top:0;left:15%;">{{untreated_data.length}}</view>
     </view>
 
     <view class='tabBar-menu' bindtap='tabBarClick'>
@@ -53,7 +54,28 @@
         </block>
         <block wx:for="{{untreated_data}}" wx:key="{{*this}}">
             <view class="page__bd">
-                <view class="weui-form-preview">
+                <view class="weui-form-preview" wx:if="{{item.tip}}">
+                    <view class="weui-form-preview__hd">
+                        <view class="weui-form-preview__item">
+                            <view class="weui-form-preview__label">餐桌号</view>
+                            <view class="weui-form-preview__value_in-hd" style="margin-right:30px;color:#76a6e9">{{item.table_id}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-form-preview__bd">
+                        <view class="weui-form-preview__item">
+                            <view class="weui-form-preview__label">时间</view>
+                            <view class="weui-form-preview__value order-item">{{item.time}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-form-preview__bd">
+                        <view class="weui-form-preview__item">
+                            <view class="weui-form-preview__value order-item order-tip  {{item.msg == 5 ? 'red':''}} ">{{item.table_id}} 号桌{{service_tip[item.msg]}}</view>
+                        </view>
+                        <button class="weui-btn btn2" data-order="{{item.order_id}}" data-index="{{index}}" type="default" plain="true" bindtap='acceptOrderService' >确认</button>
+                    </view>
+                    
+                </view>
+                <view class="weui-form-preview" wx:else>
                     <view class="weui-form-preview__hd">
                         <view class="weui-form-preview__item">
                             <view class="weui-form-preview__label">餐桌号</view>
@@ -73,7 +95,7 @@
                             <view class="weui-form-preview__label">价格</view>
                             <view class="weui-form-preview__value order-item">￥{{item.price}} 元</view>
                         </view>
-                        <button class="weui-btn btn2" data-table="{{item.table}}" data-index="{{index}}" data-id='{{item.pid}}' type="primary" plain="true" bindtap='acceptOrder'>确认</button>
+                        <button class="weui-btn btn2" data-table="{{item.table}}" data-index="{{index}}" data-id='{{item.pid}}' type="primary" plain="true" bindtap='acceptOrder'>确认订单</button>
                     </view>
                     <view class="weui-form-preview__ft" bindtap='isOpenDetail' data-msg="1" id="{{index}}">
                         <image src="/images/{{item.show === -1 ? 'open_detail' : 'close_detail'}}.png" class="showdetail"></image>

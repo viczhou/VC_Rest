@@ -8,11 +8,13 @@ Page({
         handback_count: 0,
         total_money: 0,
         oder_num: 0,
+        redhot_num: 0,
+        service_tip: ['请求添饭', '请求送水', '需要纸巾', '需要餐具', '催单', '申请退单'],
         grids: [0, 1, 2, 3, 4, 5],
         imgs: ['print', 'shop_info', 'qr_code', 'menu_manger', 'qr_code_manger', 'shop_status'],
         img_title: ['打印机', '餐厅信息', '管理桌码', '菜品管理', '扫码结账', '营业状态'],
         urls: ['print/print', 'restinfo/restinfo', 'tablecode/tablecode', 'menumanger/menumanger', 'scancodepay/scancodepay', 'reststatus/reststatus'],
-        tabs: ["全部订单", "退单", "未结账订单"],
+        tabs: ["全部订单", "已退单", "未结账订单"],
         activeIndex: 0,
         sliderOffset: 0,
         sliderLeft: 0,
@@ -51,7 +53,7 @@ Page({
                 },
                 success: function (res) {
                     //console.log(res.data)
-                    console.log(that.data.untreated_data)
+                    //console.log(that.data.untreated_data)
                     let data = res.data
                     let untreated_data = that.data.untreated_data
                     let time
@@ -59,24 +61,105 @@ Page({
                     for (let i = 0; i < data.length; i++) {
                         time = data[i].time.substring(2).replace(/-/g, '').replace(/:/g, '').replace(/ /g, '').trim()
                         data[i].pid = time + data[i].order_id
-                  
-                        for (j = 0; j < untreated_data.length ; j ++){
-                            if (untreated_data[j].pid == data[i].pid){
+
+                        for (j = 0; j < untreated_data.length; j++) {
+                            if (untreated_data[j].pid == data[i].pid) {
                                 break
                             }
                         }
-                        if (j == untreated_data.length){
-                            untreated_data.push(data[i])
+                        if (j == untreated_data.length) {
+                            untreated_data.unshift(data[i])
                         }
                     }
-
 
                     that.setData({
                         untreated_data: untreated_data
                     })
+
+                    let len = untreated_data.length
+
+                    if (that.data.redhot_num < len) {         
+                        
+                        if (wx.getStorageSync('shake')) {
+                            wx.vibrateLong({})
+                        }
+                        if (wx.getStorageSync('sound')) {
+                            wx.playBackgroundAudio({
+                                dataUrl: 'https://viczhou.cn/tip.mp3',
+                            })
+                        }
+                    }
+                    that.setData({
+                        redhot_num: len
+                    })
+
                 }.bind(this)
             })
-        }.bind(this), 1000 * 30)
+
+            //请求通知内容
+            wx.request({
+                url: 'https://viczhou.cn/vc/shopService',
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: 'GET',
+                data: {
+                    shop_id: wx.getStorageSync("shop_id")
+                },
+                success: function (res) {
+                    let data
+
+                    let res_data = res.data
+                    if (res_data.data == undefined) {
+                        res_data = []
+                    } else {
+                        res_data = res_data.data
+                    }
+                    let untreated_data = that.data.untreated_data
+                    for (let i = 0; i < res_data.length; i++) {
+                        data = res_data[i]
+                        data.tip = 1
+                        let j
+                        for (j = 0; j < untreated_data.length; j++) {
+                            if (untreated_data[j].tip == undefined) {
+                                continue
+                                // || JSON.stringify(untreated_data[j]) == JSON.stringify(data)
+                            } else if (data.order_id == untreated_data[j].order_id && data.msg == untreated_data[j].msg) {
+                                untreated_data.splice(j, 1)
+                                untreated_data.unshift(data)
+                                break;
+                            }
+                        }
+
+                        if (j == untreated_data.length) {
+                            untreated_data.unshift(data)
+                        }
+                    }
+
+                    that.setData({
+                        untreated_data: untreated_data
+                    })
+
+                    let len = untreated_data.length
+                    if (that.data.redhot_num < len) {
+                        
+                        if (wx.getStorageSync('shake')) {
+                            wx.vibrateLong({})
+                        }
+                        if (wx.getStorageSync('sound')) {
+                            wx.playBackgroundAudio({
+                                dataUrl: 'https://viczhou.cn/tip.mp3',
+                            })
+                        }
+                    }
+                    that.setData({
+                        redhot_num: len
+                    })
+
+                }
+            })
+
+        }.bind(this), 1000 * 5)
 
         wx.getSystemInfo({
             success: function (res) {
@@ -273,9 +356,9 @@ Page({
     },
     //上拉刷新
     onReachBottom: function () {
-          
+
     },
-    acceptOrder:function(e){
+    acceptOrder: function (e) {
         let that = this
         let order_id = e.currentTarget.dataset.id.substring(12)
         let index = e.currentTarget.dataset.index
@@ -288,24 +371,72 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
             },
             method: 'POST',
-            data:{
-                order_id: order_id ,
+            data: {
+                order_id: order_id,
                 status: 1
             },
-            success:function(res){
-                if(res.data.msg == 0){
-                    data.splice(index,1)
-                    
+            success: function (res) {
+                if (res.data.msg == 0) {
+                    data.splice(index, 1)
+
                     that.setData({
-                        untreated_data:data
+                        untreated_data: data
                     })
 
                     wx.showToast({
-                        title: '已确认' + table+'号桌订单',
-                        icon:'none'
+                        title: '已确认' + table + '号桌订单',
+                        icon: 'none'
                     })
                 }
             }
+        })
+
+    },
+    acceptOrderService: function (e) {
+        let index = e.currentTarget.dataset.index
+        let data = this.data.untreated_data[index]
+        let untreated_data = this.data.untreated_data
+        let that = this
+        let order_id = e.currentTarget.dataset.order
+        wx.request({
+            url: 'https://viczhou.cn/vc/FinishShopService',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: 'POST',
+            data: {
+                'shop_id': wx.getStorageSync("shop_id"),
+                'table_id': data.table_id,
+                'msg': data.msg
+            },
+            success: function (res) {
+                untreated_data.splice(index, 1)
+                that.setData({
+                    untreated_data: untreated_data
+                })
+
+                if (data.msg == 5) {
+                    wx.request({
+                        url: 'https://viczhou.cn/vc_rest/order/pay',
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded'
+                        },
+                        method: 'POST',
+                        data: {
+                            order_id: order_id,
+                            status: 2
+                        },
+                        success: function (res) {
+                            wx.showToast({
+                                title: '退单成功',
+                                icon: 'none'
+                            })
+                        }
+                    })
+
+                }
+            }
+
         })
 
     }

@@ -142,26 +142,35 @@
     position: absolute;
     top: 10px;
     left: 80px;
-    right:0;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-
-
+    right: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .detail-price {
     position: absolute;
-    top :40px ;
+    top: 40px;
     left: 80px;
-    color:red;
+    color: red;
     font-size: 15px;
 }
 
 .detail-count {
     position: absolute;
     top: 40px;
-    left : 80%;
-    color:#999;
+    left: 80%;
+    color: #999;
     font-size: 14px;
+}
+
+.order-tip {
+    text-align: center;
+    margin: 0 0;
+    font-size: 20px;
+    color: #76a6e9;
+}
+
+.red{
+    color:red;
 }
